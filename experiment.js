@@ -67,7 +67,7 @@ var open_fullscreen = {
     &emsp;&emsp;（Chrome、Edge、Firefox、Safari等，不要用IE）<br/>
     （2）关掉电脑上其他正在运行的程序或将其最小化<br/>
     （3）将手机调至静音，并尽可能减少环境噪音干扰<br/>
-    （4）在测验过程中不要退出全屏<br/>
+    （4）在测验过程中不要退出全屏或刷新页面<br/>
     （5）务必认真作答<br/><br/>
     </b>
     如果你同意参与，并且清楚理解了上述要求，请点击开始：
@@ -77,6 +77,22 @@ var open_fullscreen = {
 }
 
 var welcome = {
+    type: 'instructions',
+    data: { value: new Date().toLocaleTimeString() },
+    pages: [ `
+    <p style="font: bold 32pt 微软雅黑; color: #B22222">
+    欢迎参与我们的实验</p>
+    <p style="font: 20pt 微软雅黑; color: black"><br/>
+    <b>实验过程中请勿退出全屏</b><br/><br/></p>
+    <p style="font: 20pt 华文中宋; color: grey">
+    江西师范大学<br/>2021年</p>`],
+    show_clickable_nav: true,
+    allow_backward: false,
+    button_label_previous: '返回',
+    button_label_next: '继续'
+}
+
+/*var welcome = {
     type: 'html-keyboard-response',
     stimulus: `
     <p style="font: bold 32pt 微软雅黑; color: #B22222">
@@ -89,53 +105,13 @@ var welcome = {
     choices: [' '],
     //post_trial_gap: n   下个页面呈现前将有持续n毫秒的空白页
     post_trial_gap: 100
-}
+}*/
 
 var warmup = {
     type: 'html-button-response',
-    stimulus: '<p>请做好准备……</p>',
-    //['<span id="timer">5</span>秒后继续']此处通过在function.js中设置函数，使id=timer的部件具有倒计时功能。
-    choices: ['<span id="timer">5</span>秒后继续'],
+    stimulus: `<p>在每一部分的问题前都有详细的指导语，请务必仔细阅读指导语后再进行作答。每个人的行为或想法都不一样，所以问题的答案没有好与坏之分，您只需要按照内心的直觉作答即可。如果不是理解错误导致的错选，您无需反复修改您的答案。</p><p>您的回答不会被用于除研究以外的其他用途或透露给与研究无关的人员，本研究也不会记录任何事后能将您与本问卷回答进行联系或追溯的个人信息，请放心作答。</p><p>遇到没有选择按钮时，请尝试使用滚轮向下查看。</p>`,
+    choices: ['<span id="timer">10</span>秒后继续'],
     button_html: btn_html_timer
-}
-
-var instr_4 = {
-    type: 'instructions',
-    pages: [
-        `<p style="text-align: left">
-        指导语：<br/>
-        下面有一系列陈述，<br/>
-        请表明你对这些陈述的同意程度。<br/><br/>
-        1 = 非常不同意<br/>
-        2 = 不同意<br/>
-        3 = 同意<br/>
-        4 = 非常同意</p>`,
-    ],
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '继续'
-}
-
-var instr_7 = {
-    type: 'instructions',
-    pages: [
-        `<p style="text-align: left">
-        指导语：<br/>
-        下面有一系列陈述，<br/>
-        请表明你对这些陈述的同意程度。<br/><br/>
-        1 = 非常不同意<br/>
-        2 = 不同意<br/>
-        3 = 比较不同意<br/>
-        4 = 不确定<br/>
-        5 = 比较同意<br/>
-        6 = 同意<br/>
-        7 = 非常同意</p>`,
-    ],
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '继续'
 }
 
 var close_fullscreen = {
@@ -143,6 +119,31 @@ var close_fullscreen = {
     fullscreen_mode: false,
     delay_after: 0
 }
+
+var instr_shame = {
+    type: 'instructions',
+    pages: [
+        `<p>羞耻唤起任务</p>`,
+    ],
+    show_clickable_nav: true,
+    allow_backward: false,
+    button_label_previous: '返回',
+    button_label_next: '继续'
+}
+
+var instr_control = {
+    type: 'instructions',
+    pages: [
+        `<p style="text-align: left">
+        中性任务</p>`,
+    ],
+    show_clickable_nav: true,
+    allow_backward: false,
+    button_label_previous: '返回',
+    button_label_next: '继续'
+}
+
+
 
 
 /* Blocks: Surveys */
@@ -167,7 +168,7 @@ var Age = {
     on_finish: function(data) { addRespFromSurvey(data) }
 }
 
-var Birth = {
+/*var Birth = {
     type: 'survey-html-form',
     data: { varname: 'Birth' },
     preamble: '你的生日',
@@ -175,7 +176,7 @@ var Birth = {
     button_label: '继续',
     //此处需要注意name="Q0",下面这个语段是记录被试的回答，且只记录单个答案，且通过name="Q0"定位
     on_finish: function(data) { addRespFromSurvey(data) }
-}
+}*/
 
 var Email = {
     type: 'survey-html-form',
@@ -190,20 +191,20 @@ var Email = {
 var School = {
     type: 'survey-html-form',
     data: { varname: 'School' },
-    preamble: '你的学校',
+    preamble: '你的最高学历',
     html: `
     <p><select name="Q0" size=10>
-    <option>北京大学</option>
-    <option>清华大学</option>
-    <option>中国人民大学</option>
-    <option>北京师范大学</option>
+    <option>大专及大专在读</option>
+    <option>本科及本科在读</option>
+    <option>硕士及硕士在读</option>
+    <option>硕士以上</option>
     <option>其他</option>
     </select></p>`,
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
 
-var Language = {
+/*var Language = {
     type: 'survey-multi-select',
     data: { varname: 'Language' },
     questions: [{
@@ -214,7 +215,7 @@ var Language = {
     }],
     button_label: '继续',
     on_finish: function(data) { replaceComma(data) }
-}
+}*/
 
 var NameLiking = {
     type: 'html-slider-response',
