@@ -302,7 +302,7 @@ var OpenEnded = {
 
 // Stimuli
 
-var EAST_attrib_words = [
+/*var EAST_attrib_words = [
     { data: { stim_type: 'pos' }, s: '健康' },
     { data: { stim_type: 'pos' }, s: '快乐' },
     { data: { stim_type: 'pos' }, s: '美好' },
@@ -311,27 +311,21 @@ var EAST_attrib_words = [
     { data: { stim_type: 'neg' }, s: '卑鄙' },
 ]
 
-var a1 = '玫瑰'
-var a2 = '牡丹'
-var b1 = '空气'
-var b2 = '土地'
-var c1 = '蟑螂'
-var c2 = '蚊子'
 var blu = 'rgb(0, 125, 150)'
 var grn = 'rgb(0, 150, 125)'
 var EAST_target_words = [
-    { data: { stim_type: blu, x: 'a' }, s: a1 },
-    { data: { stim_type: blu, x: 'a' }, s: a2 },
-    { data: { stim_type: blu, x: 'b' }, s: b1 },
-    { data: { stim_type: blu, x: 'b' }, s: b2 },
-    { data: { stim_type: blu, x: 'c' }, s: c1 },
-    { data: { stim_type: blu, x: 'c' }, s: c2 },
-    { data: { stim_type: grn, x: 'a' }, s: a1 },
-    { data: { stim_type: grn, x: 'a' }, s: a2 },
-    { data: { stim_type: grn, x: 'b' }, s: b1 },
-    { data: { stim_type: grn, x: 'b' }, s: b2 },
-    { data: { stim_type: grn, x: 'c' }, s: c1 },
-    { data: { stim_type: grn, x: 'c' }, s: c2 },
+    { data: { stim_type: blu, x: 'a' }, s: '玫瑰' },
+    { data: { stim_type: blu, x: 'a' }, s: '牡丹' },
+    { data: { stim_type: blu, x: 'b' }, s: '空气' },
+    { data: { stim_type: blu, x: 'b' }, s: '土地' },
+    { data: { stim_type: blu, x: 'c' }, s: '蟑螂' },
+    { data: { stim_type: blu, x: 'c' }, s: '蚊子' },
+    { data: { stim_type: grn, x: 'a' }, s: '玫瑰' },
+    { data: { stim_type: grn, x: 'a' }, s: '牡丹' },
+    { data: { stim_type: grn, x: 'b' }, s: '空气' },
+    { data: { stim_type: grn, x: 'b' }, s: '土地' },
+    { data: { stim_type: grn, x: 'c' }, s: '蟑螂' },
+    { data: { stim_type: grn, x: 'c' }, s: '蚊子' },
 ]
 
 var tag_LR1 = `<div class="tag-left">按“F”键:<br/>积极词</div>
@@ -344,56 +338,6 @@ var tag_LR3 = `<div class="tag-left">按“F”键:<br/>积极词<br/>或<br/><s
                <div class="tag-right">按“J”键:<br/>消极词<br/>或<br/><span style="color:${grn}">绿色</span></div>`
 
 // Instructions
-
-var EAST_prac1_instr = {
-    type: 'html-keyboard-response',
-    stimulus: `
-    <p style="text-align: left; font-size: 20pt">
-    练习任务1：<br/><br/>
-    下面是一个“形容词分类”任务。<br/>
-    屏幕上将依次呈现一些形容词，它们分别具有<span style="color:#FFD866">积极</span>或<span style="color:#FFD866">消极</span>的含义。<br/>
-    在每个形容词呈现之前，屏幕上会出现注视点“+”来提醒您注意。<br/>
-    在每个形容词呈现之后，请<span style="color:#FFD866">尽量正确并且快速地</span>做出按键反应。<br/>
-    - 如果出现<span style="color:#FFD866">积极</span>形容词，请按<span style="color:#FFD866">“F”键</span>。<br/>
-    - 如果出现<span style="color:#FFD866">消极</span>形容词，请按<span style="color:#FFD866">“J”键</span>。<br/>
-    每次判断均会有正确（“√”）或错误（“X”）的反馈。<br/><br/>
-    现在，请您双手食指分别放在“F”键和“J”键上，并保证实验过程中双手不离开键盘。<br/>
-    如果您已认真阅读并充分理解了上述要求，请按空格键开始。</p>`,
-    choices: [' ']
-}
-
-var EAST_prac2_instr = {
-    type: 'html-keyboard-response',
-    stimulus: `
-    <p style="text-align: left; font-size: 20pt">
-    练习任务2：<br/><br/>
-    下面是一个“名词分类”任务。<br/>
-    屏幕上将依次呈现一些名词，它们分别具有<span style="color:${blu}">蓝色■</span>或<span style="color:${grn}">绿色■</span>的字体颜色。<br/>
-    在每个名词呈现之前，屏幕上会出现注视点“+”来提醒您注意。<br/>
-    在每个名词呈现之后，请<span style="color:#FFD866">尽量正确并且快速地</span>做出按键反应。<br/>
-    - 如果出现<span style="color:${blu}">蓝色</span>名词，请按<span style="color:#FFD866">“F”键</span>。<br/>
-    - 如果出现<span style="color:${grn}">绿色</span>名词，请按<span style="color:#FFD866">“J”键</span>。<br/>
-    每次判断均会有正确(“√”)或错误(“X”)的反馈。<br/><br/>
-    现在，请您双手食指分别放在“F”键和“J”键上，并保证实验过程中双手不离开键盘。<br/>
-    如果您已认真阅读并充分理解了上述要求，请按空格键开始。</p>`,
-    choices: [' ']
-}
-
-var EAST_test_instr = {
-    type: 'html-keyboard-response',
-    stimulus: `
-    <p style="text-align: left; font-size: 20pt">
-    正式任务：<br/><br/>
-    接下来是正式任务，先前两个练习任务中的白色形容词和彩色名词会随机交替出现。<br/>
-    你仍然需要<span style="color:#FFD866">尽量正确并且快速地</span>对它们的属性做出判断：<br/>
-    - 如果出现<span style="color:#FFD866">积极</span>形容词或<span style="color:${blu}">蓝色</span>名词，请按<span style="color:#FFD866">“F”键</span>。<br/>
-    - 如果出现<span style="color:#FFD866">消极</span>形容词或<span style="color:${grn}">绿色</span>名词，请按<span style="color:#FFD866">“J”键</span>。<br/>
-    这次将不再呈现关于正确或错误的反馈。<br/><br/>
-    现在，请您双手食指分别放在“F”键和“J”键上，并保证实验过程中双手不离开键盘。<br/>
-    如果您已认真阅读并充分理解了上述要求，请按空格键开始。</p>`,
-    choices: [' ']
-}
-
 // Exp. Blocks
 
 var EAST_prac1 = {
@@ -434,188 +378,34 @@ var EAST_prac1 = {
     // trial presentation
     repetitions: 2,
     randomize_order: true
-}
+}*/
 
 var coinlist = [
-    { data: { face: 0}, s: a1 },
-    { data: { face: 1 }, s: a2 },
-    { data: { face: 1 }, s: b1 },
-    { data: { face: 0 }, s: b2 },
-    { data: { face: 0 }, s: c1 },
-    { data: { face: 0 }, s: c2 },
-    { data: { face: 0 }, s: a1 },
-    { data: { face: 0 }, s: a2 },
-    { data: { face: 0 }, s: b1 },
-    { data: { face: 0 }, s: b2 },
-    { data: { face: 0 }, s: c1 },
-    { data: { face: 0 }, s: c2 },
+    { face: 1, },
+    { face: 0, },
+    { face: 1, },
+    
 ]
 //硬币
 var cointrust = {
-    // stimulus items
     timeline_variables: coinlist,
-    // single trial
     timeline: [{
-            // fixation
             type: 'html-button-response',
-            data: jsPsych.timelineVariable('data'),
             stimulus: function() {
-                return `<div id="euro" class="trans${jsPsych.timelineVariable('data', true).face}"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>`
+                var html = '<div id="euro" class="'+jsPsych.timelineVariable('face')+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
+                return html;
             },
             prompt: '你认为你的搭档将会报告哪一面',
             choices:['国徽面', '数字面'],
             response_ends_trial: false,
-            post_trial_gap: 50
-        },
-    ],
+        }],
+    on_timeline_finish: function() {
+        console.log('The trial procedure just finished.')
+    },
     // trial presentation
-    randomize_order: true
+    randomize_order: false
 }
 
-var EAST_prac2 = {
-    // stimulus items
-    timeline_variables: EAST_target_words,
-    // single trial
-    timeline: [{
-            // fixation
-            type: 'html-keyboard-response',
-            stimulus: '+',
-            choices: jsPsych.NO_KEYS,
-            prompt: tag_LR2,
-            trial_duration: 500,
-            post_trial_gap: 0,
-            response_ends_trial: false
-        },
-        {
-            // word stimulus
-            type: 'categorize-html',
-            data: jsPsych.timelineVariable('data'),
-            stimulus: function() {
-                return `<p style="color:${jsPsych.timelineVariable('data', true).stim_type}">${jsPsych.timelineVariable('s', true)}</p>`
-            },
-            choices: ['f', 'j'],
-            key_answer: function() {
-                switch (jsPsych.timelineVariable('data', true).stim_type) {
-                    case blu:
-                        return keyCode('f')
-                    case grn:
-                        return keyCode('j')
-                }
-            },
-            prompt: tag_LR2,
-            correct_text: tag_LR2 + feedback_right,
-            incorrect_text: tag_LR2 + feedback_wrong,
-            feedback_duration: 500,
-            force_correct_button_press: true
-        },
-    ],
-    // trial presentation
-    repetitions: 1,
-    randomize_order: true
-}
-
-var EAST_test_warmup = {
-    type: 'html-keyboard-response',
-    stimulus: '',
-    choices: jsPsych.NO_KEYS,
-    prompt: tag_LR3,
-    trial_duration: 2000,
-    response_ends_trial: false
-}
-
-var EAST_test = {
-    // stimulus items
-    timeline_variables: [].concat(EAST_attrib_words, EAST_attrib_words, EAST_target_words),
-    // single trial
-    timeline: [{
-            // fixation
-            type: 'html-keyboard-response',
-            stimulus: '+',
-            choices: jsPsych.NO_KEYS,
-            prompt: tag_LR3,
-            trial_duration: 500,
-            post_trial_gap: 0,
-            response_ends_trial: false
-        },
-        {
-            // word stimulus
-            type: 'categorize-html',
-            data: jsPsych.timelineVariable('data'),
-            stimulus: function() {
-                var stim_type = jsPsych.timelineVariable('data', true).stim_type
-                var stimulus = jsPsych.timelineVariable('s', true)
-                switch (stim_type) {
-                    case 'pos':
-                    case 'neg':
-                        return stimulus
-                    case blu:
-                    case grn:
-                        return `<p style="color:${stim_type}">${stimulus}</p>`
-                }
-            },
-            choices: ['f', 'j'],
-            key_answer: function() {
-                switch (jsPsych.timelineVariable('data', true).stim_type) {
-                    case 'pos':
-                    case blu:
-                        return keyCode('f')
-                    case 'neg':
-                    case grn:
-                        return keyCode('j')
-                }
-            },
-            prompt: tag_LR3,
-            correct_text: tag_LR3,
-            incorrect_text: tag_LR3,
-            feedback_duration: function() { return Math.random() * 1000 + 1000 }, // ITI: 1~2s
-            show_stim_with_feedback: false,
-            force_correct_button_press: false,
-            on_finish: function(data) { data.formal = true }
-        },
-    ],
-    // trial presentation
-    repetitions: 2,
-    randomize_order: true
-}
-
-
-/* Blocks: Feedbacks */
-
-var debrief1 = {
-    type: 'html-keyboard-response',
-    stimulus: function() {
-        return `
-        <p style="text-align: left">
-        结果反馈（问卷部分）：<br/><br/>
-        你的生活满意度：${MEAN('SWLS').toFixed(1)}（取值范围1~7）<br/>
-        你的自尊水平：${MEAN('RSES', rev = [3, 5, 8, 9, 10], likert = [1, 4]).toFixed(1)}（取值范围1~4）<br/><br/>
-        （按任意键继续）</p>`
-    }
-}
-
-var debrief2 = {
-    type: 'html-keyboard-response',
-    stimulus: function() {
-        var data = jsPsych.data.get()
-        var east_a_grn = data.filter({ formal: true, correct: true, stim_type: grn, x: 'a' }).select('rt').mean()
-        var east_a_blu = data.filter({ formal: true, correct: true, stim_type: blu, x: 'a' }).select('rt').mean()
-        var east_b_grn = data.filter({ formal: true, correct: true, stim_type: grn, x: 'b' }).select('rt').mean()
-        var east_b_blu = data.filter({ formal: true, correct: true, stim_type: blu, x: 'b' }).select('rt').mean()
-        var east_c_grn = data.filter({ formal: true, correct: true, stim_type: grn, x: 'c' }).select('rt').mean()
-        var east_c_blu = data.filter({ formal: true, correct: true, stim_type: blu, x: 'c' }).select('rt').mean()
-        var east_a = east_a_grn - east_a_blu
-        var east_b = east_b_grn - east_b_blu
-        var east_c = east_c_grn - east_c_blu
-        return `
-        <p style="text-align: left">
-        结果反馈（实验部分）：<br/><br/>
-        你对玫瑰、牡丹的内隐态度：${east_a.toFixed(2)}<br/>
-        你对空气、土地的内隐态度：${east_b.toFixed(2)}<br/>
-        你对蟑螂、蚊子的内隐态度：${east_c.toFixed(2)}<br/>
-        （小于0 = 消极，0 = 中性，大于0 = 积极）<br/><br/>
-        （按任意键继续）</p>`
-    }
-}
 
 
 /* Combine Timelines */
@@ -628,36 +418,23 @@ var demographics = {
 
 /*var surveys = {
     timeline: [
-        NameLiking,
-        instr_4, RSES,
-        instr_7, SWLS,
+        NameLiking, RSES, SWLS,
         debrief1,
     ]
 }*/
 
-var EAST = {
-    timeline: [
-        set_html_style_EAST,
-        EAST_prac1_instr, EAST_prac1,
-        EAST_prac2_instr, EAST_prac2,
-        EAST_test_instr, EAST_test_warmup, EAST_test,
-        set_html_style,
-        debrief2,
-    ]
-}
 
 var main_timeline = [
     set_html_style,
-    NameLiking,
     /*open_fullscreen,
     welcome,
-    warmup,*/
-    demographics,
-    /*cointrust,
-    surveys,
-    EAST,
-    OpenEnded,
-    close_fullscreen,*/
+    warmup,
+    demographics,*/
+    cointrust,
+    warmup,
+    /*surveys,
+    OpenEnded,*/
+    close_fullscreen,
 ]
 
 
