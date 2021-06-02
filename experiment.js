@@ -217,23 +217,9 @@ var School = {
     on_finish: function(data) { replaceComma(data) }
 }*/
 
-var NameLiking = {
-    type: 'html-slider-response',
-    data: { varname: 'NameLiking' },
-    on_load: function() { setSliderAttr() },
-    stimulus: '总体而言，你在多大程度上喜欢自己的名字？<br/>（1 = 非常不喜欢，9 = 非常喜欢）',
-    labels: ['非常不喜欢', '比较不喜欢', '3', '4', '5', '6', '7', '8', '9'],
-    min: 1,
-    max: 9,
-    start: 5,
-    prompt: '<b id="slider-value">_</b><br/><br/>',
-    button_label: '继续',
-    require_movement: true
-}
-
 var SWLS = {
     timeline: [{
-        type: 'html-button-response',
+        type: 'html-slider-response',
         data: jsPsych.timelineVariable('data'),
         stimulus: jsPsych.timelineVariable('s'),
         prompt: `
@@ -381,9 +367,9 @@ var EAST_prac1 = {
 }*/
 
 var coinlist = [
-    { face: 1, },
-    { face: 0, },
-    { face: 1, },
+    { data: { varname: coin },face: 1, },
+    { data: { varname: coin },face: 0, },
+    { data: { varname: coin },face: 1, },
     
 ]
 //硬币
@@ -391,17 +377,21 @@ var cointrust = {
     timeline_variables: coinlist,
     timeline: [{
             type: 'html-button-response',
+            data: jsPsych.timelineVariable('data'),
             stimulus: function() {
                 var html = '<div id="euro" class="'+jsPsych.timelineVariable('face')+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
                 return html;
             },
             prompt: '你认为你的搭档将会报告哪一面',
             choices:['国徽面', '数字面'],
-            response_ends_trial: false,
-        }],
-    on_timeline_finish: function() {
-        console.log('The trial procedure just finished.')
-    },
+        },
+        {
+            type: 'html-keyboard-response',
+            stimulus: '继续……',
+            choices: jsPsych.NO_KEYS,
+            trial_duration: Math.floor(Math.random()*1000+1000),
+        },
+        ],
     // trial presentation
     randomize_order: false
 }

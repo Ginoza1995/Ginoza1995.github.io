@@ -34,7 +34,7 @@ body {
     height: 150px;
     margin-left: 115px;transform-style: preserve-3d;
     animation: spin 1s linear infinite;
-    animation-iteration-count: 7;
+    animation-iteration-count: 2;
 }
 .back {
     background-image: url("images/backeuro.png");
