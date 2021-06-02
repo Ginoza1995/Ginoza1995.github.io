@@ -17,7 +17,57 @@ function inputDialog(title, default_text) {
     return input
 }
 
-//通过'<span id="timer">5</span>秒后继续'来设置倒计时，关键点是部件id须为"timer",部件内容为单个数字。
+function countdown(){
+    var a = document.getElementById('timelimit');
+    var minutes = Math.floor(mt/60);
+    var seconds = Math.floor(mt%60);
+    var str = '剩余时间：'+minutes+'分'+seconds+'秒';
+    a.innerHTML=str;
+    --mt;
+    if (mt<=0) {
+        alert("时间到，当前测验已结束！确定以继续实验流程，谢谢。")
+        document.getElementById('jspsych-test-multi-select-next').click();
+    }
+}
+
+//survey text 字数限制
+function word_length() {
+    var n = document.querySelector("#input-0").textLength;
+    var btn = document.querySelector("#jspsych-survey-text-next")
+    if(n<50){
+      btn.disabled = true;
+      } else {
+      btn.disabled = false;
+      }
+}
+    
+function nextquestion(){
+    var nowq = parseInt(document.querySelector("#nextq").getAttribute("index"));
+    var nowid = 'jspsych-test-multi-select-'+nowq;
+    var newid = 'jspsych-test-multi-select-'+(nowq+1);
+    document.getElementById(nowid).classList.add('hidden');
+    document.getElementById(newid).classList.remove('hidden');
+    document.querySelector("#preq").classList.remove('hidden');
+    document.querySelector("#nextq").setAttribute('index',(nowq+1));
+    if ((nowq+2) == parseInt(document.querySelector("#jspsych-test-multi-select-form").getAttribute("index"))) {
+        document.querySelector("#nextq").classList.add('hidden');
+        document.getElementById('jspsych-test-multi-select-next').classList.remove("hidden");
+    }
+}
+
+function prequestion(){
+    var nowq = parseInt(document.querySelector("#nextq").getAttribute("index"));
+    var nowid = 'jspsych-test-multi-select-'+nowq;
+    var newid = 'jspsych-test-multi-select-'+(nowq-1);
+    document.getElementById(nowid).classList.add('hidden');
+    document.getElementById(newid).classList.remove('hidden');
+    document.querySelector("#nextq").classList.remove('hidden');
+    document.querySelector("#nextq").setAttribute('index',(nowq-1));
+    if (nowq == 1) {
+        document.querySelector("#preq").classList.add('hidden');
+    }
+}
+
 function timer() {
     var second = document.getElementById('timer')
     var button = document.getElementsByClassName('jspsych-btn')[0]
@@ -60,7 +110,8 @@ function setSliderAttr(event = 'onmouseup') {
 }
 
 function addSliderValue(element_id = 'slider-value') {
-    document.getElementById(element_id).innerHTML = document.getElementById('jspsych-html-slider-response-response').value
+    var sss = "aj" + (parseInt(document.getElementById('jspsych-html-slider-response-response').value)-1)
+    document.getElementById(element_id).innerHTML = document.getElementById(sss).getAttribute("ans")
     document.getElementById('jspsych-html-slider-response-next').disabled = false
 }
 
@@ -76,6 +127,11 @@ function MEAN(scale_name, rev = [0], likert = [1, 7], var_i = 'i', var_response 
         }
     }
     return sum / df.length
+}
+
+function changersm(n){
+    var imgs=["https://z3.ax1x.com/2021/03/22/6TAq81.png","https://z3.ax1x.com/2021/03/22/6TAbCR.png","https://z3.ax1x.com/2021/03/22/6TA759.png"];
+    document.getElementById("imgShow").src=imgs[n-1];
 }
 
 
