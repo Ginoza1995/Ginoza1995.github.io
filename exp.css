@@ -29,3 +29,45 @@ body {
     top: 15%;
     right: 20%;
 }
+#euro {
+    width: 150px;
+    height: 150px;
+    margin-left: 115px;transform-style: preserve-3d;
+    animation: spin 1s linear infinite;
+    animation-iteration-count: 7;
+}
+.back {
+    background-image: url("images/backeuro.png");
+    width: 150px;
+    height: 150px;
+}
+.trans1 {
+    transform: rotateY(180deg);
+}
+.trans0 {
+    transform: rotateY(180deg);
+}
+.middle {
+    background-image: url("images/faceeuro.png");
+    width: 150px;
+    height: 150px;
+    transform: translateZ(1px);
+    position: absolute;
+    top: 0;
+}
+.front {
+    background-image: url("images/faceeuro.png");
+    height: 150px;
+    position: absolute;
+    top: 0;
+    transform: translateZ(10px);
+    width: 150px;
+}
+@keyframes spin {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}

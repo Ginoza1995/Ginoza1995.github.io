@@ -114,8 +114,8 @@ jsPsych.plugins['html-slider-response'] = (function() {
     for(var j=0; j < trial.labels.length; j++){
       var width = 100/(trial.labels.length-1);
       var left_offset = (j * (100 /(trial.labels.length - 1))) - (width/2);
-      html += '<div style="display: inline-block; position: absolute; left:'+left_offset+'%; text-align: center; width: '+width+'%;">';
-      html += '<span style="text-align: center; font-size: 80%;">'+trial.labels[j]+'</span>';
+      html += '<div style="display: inline-block; position: absolute; left:'+left_offset+'%; text-align: center; width: '+width+'%;" id="aj'+j+'" ans="'+trial.labels[j]+'">';
+      html += '<span style="text-align: center; font-size: 80%;">'+(j+1).toString()+'</span>';
       html += '</div>'
     }
     html += '</div>';

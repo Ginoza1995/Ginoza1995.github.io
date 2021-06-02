@@ -102,7 +102,7 @@ var welcome = {
     <b>实验过程中请勿退出全屏</b><br/><br/></p>
     <p style="font: 20pt 华文中宋; color: grey">
     江西师范大学<br/>2021年</p>`,
-    choices: [' '],
+    choices: [' ',],
     //post_trial_gap: n   下个页面呈现前将有持续n毫秒的空白页
     post_trial_gap: 100
 }*/
@@ -152,7 +152,7 @@ var Sex = {
     type: 'html-button-response',
     data: { varname: 'Sex' },
     stimulus: '你的性别',
-    choices: ['男', '女', '其他'],
+    choices: ['男', '女'],
     on_finish: function(data) { addRespFromButton(data) }
 }
 
@@ -162,7 +162,7 @@ var Age = {
     preamble: '你的年龄',
     html: `
     <p><input name="Q0" type="number" placeholder="15~99" min=15 max=99
-    oninput="if(value.length>2) value=value.slice(0,2)" required /></p>`,
+    oninput="if(value.length>2) value=value.slice(0,2)" required style="font-size:20px" /></p>`,
     button_label: '继续',
         //此处需要注意name="Q0",下面这个语段是记录被试的回答，且只记录单个答案，且通过name="Q0"定位
     on_finish: function(data) { addRespFromSurvey(data) }
@@ -222,7 +222,7 @@ var NameLiking = {
     data: { varname: 'NameLiking' },
     on_load: function() { setSliderAttr() },
     stimulus: '总体而言，你在多大程度上喜欢自己的名字？<br/>（1 = 非常不喜欢，9 = 非常喜欢）',
-    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    labels: ['非常不喜欢', '比较不喜欢', '3', '4', '5', '6', '7', '8', '9'],
     min: 1,
     max: 9,
     start: 5,
@@ -436,6 +436,42 @@ var EAST_prac1 = {
     randomize_order: true
 }
 
+var coinlist = [
+    { data: { face: 0}, s: a1 },
+    { data: { face: 1 }, s: a2 },
+    { data: { face: 1 }, s: b1 },
+    { data: { face: 0 }, s: b2 },
+    { data: { face: 0 }, s: c1 },
+    { data: { face: 0 }, s: c2 },
+    { data: { face: 0 }, s: a1 },
+    { data: { face: 0 }, s: a2 },
+    { data: { face: 0 }, s: b1 },
+    { data: { face: 0 }, s: b2 },
+    { data: { face: 0 }, s: c1 },
+    { data: { face: 0 }, s: c2 },
+]
+//硬币
+var cointrust = {
+    // stimulus items
+    timeline_variables: coinlist,
+    // single trial
+    timeline: [{
+            // fixation
+            type: 'html-button-response',
+            data: jsPsych.timelineVariable('data'),
+            stimulus: function() {
+                return `<div id="euro" class="trans${jsPsych.timelineVariable('data', true).face}"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>`
+            },
+            prompt: '你认为你的搭档将会报告哪一面',
+            choices:['国徽面', '数字面'],
+            response_ends_trial: false,
+            post_trial_gap: 50
+        },
+    ],
+    // trial presentation
+    randomize_order: true
+}
+
 var EAST_prac2 = {
     // stimulus items
     timeline_variables: EAST_target_words,
@@ -586,18 +622,18 @@ var debrief2 = {
 
 var demographics = {
     timeline: [
-        Sex, Age, Birth, Language, School, Email,
+        Sex, Age,  School, Email,
     ]
 }
 
-var surveys = {
+/*var surveys = {
     timeline: [
         NameLiking,
         instr_4, RSES,
         instr_7, SWLS,
         debrief1,
     ]
-}
+}*/
 
 var EAST = {
     timeline: [
@@ -612,14 +648,16 @@ var EAST = {
 
 var main_timeline = [
     set_html_style,
-    open_fullscreen,
+    NameLiking,
+    /*open_fullscreen,
     welcome,
-    warmup,
+    warmup,*/
     demographics,
+    /*cointrust,
     surveys,
     EAST,
     OpenEnded,
-    close_fullscreen,
+    close_fullscreen,*/
 ]
 
 
