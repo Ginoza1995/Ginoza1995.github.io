@@ -17,19 +17,6 @@ function inputDialog(title, default_text) {
     return input
 }
 
-function countdown(){
-    var a = document.getElementById('timelimit');
-    var minutes = Math.floor(mt/60);
-    var seconds = Math.floor(mt%60);
-    var str = '剩余时间：'+minutes+'分'+seconds+'秒';
-    a.innerHTML=str;
-    --mt;
-    if (mt<=0) {
-        alert("时间到，当前测验已结束！确定以继续实验流程，谢谢。")
-        document.getElementById('jspsych-test-multi-select-next').click();
-    }
-}
-
 //survey text 字数限制
 function word_length() {
     var n = document.querySelector("#input-0").textLength;
@@ -39,33 +26,6 @@ function word_length() {
       } else {
       btn.disabled = false;
       }
-}
-    
-function nextquestion(){
-    var nowq = parseInt(document.querySelector("#nextq").getAttribute("index"));
-    var nowid = 'jspsych-test-multi-select-'+nowq;
-    var newid = 'jspsych-test-multi-select-'+(nowq+1);
-    document.getElementById(nowid).classList.add('hidden');
-    document.getElementById(newid).classList.remove('hidden');
-    document.querySelector("#preq").classList.remove('hidden');
-    document.querySelector("#nextq").setAttribute('index',(nowq+1));
-    if ((nowq+2) == parseInt(document.querySelector("#jspsych-test-multi-select-form").getAttribute("index"))) {
-        document.querySelector("#nextq").classList.add('hidden');
-        document.getElementById('jspsych-test-multi-select-next').classList.remove("hidden");
-    }
-}
-
-function prequestion(){
-    var nowq = parseInt(document.querySelector("#nextq").getAttribute("index"));
-    var nowid = 'jspsych-test-multi-select-'+nowq;
-    var newid = 'jspsych-test-multi-select-'+(nowq-1);
-    document.getElementById(nowid).classList.add('hidden');
-    document.getElementById(newid).classList.remove('hidden');
-    document.querySelector("#nextq").classList.remove('hidden');
-    document.querySelector("#nextq").setAttribute('index',(nowq-1));
-    if (nowq == 1) {
-        document.querySelector("#preq").classList.add('hidden');
-    }
 }
 
 function timer() {
@@ -129,9 +89,25 @@ function MEAN(scale_name, rev = [0], likert = [1, 7], var_i = 'i', var_response 
     return sum / df.length
 }
 
-function changersm(n){
-    var imgs=["https://z3.ax1x.com/2021/03/22/6TAq81.png","https://z3.ax1x.com/2021/03/22/6TAbCR.png","https://z3.ax1x.com/2021/03/22/6TA759.png"];
-    document.getElementById("imgShow").src=imgs[n-1];
+
+function start()
+{
+     document.getElementById("jspsych-html-button-response-btngroup").classList.add("disable");
+     document.getElementById("jspsych-html-button-response-btngroup").value = 5;
+     window.setTimeout("tick()",1000);
+}
+function tick()
+{
+    var time = new Number(document.getElementById("jspsych-html-button-response-btngroup").value);
+     if(time>0)
+     {
+         document.getElementById("jspsych-html-button-response-btngroup").value = time-1;
+         window.setTimeout("tick()",1000);
+     }
+     else
+     {
+         document.getElementById("jspsych-html-button-response-btngroup").classList.remove("disable");
+     }
 }
 
 

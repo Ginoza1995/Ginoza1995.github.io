@@ -1,7 +1,3 @@
-/**
- * Author:
- * Bao H.-W.-S. (https://psychbruce.github.io)
- */
 
 
 /* Global Variables */
@@ -367,10 +363,15 @@ var EAST_prac1 = {
 }*/
 
 var coinlist = [
-    { data: { varname: coin },face: 1, },
-    { data: { varname: coin },face: 0, },
-    { data: { varname: coin },face: 1, },
-    
+    { data: { varname: "z",face: 1 },face: 1, },
+    { data: { varname: "s",face: 0 },face: 0, },
+    { data: { varname: "z",face: 0 },face: 1, },
+    { data: { varname: "s",face: 0 },face: 0, },
+    { data: { varname: "s",face: 0 },face: 0, },
+    { data: { varname: "s",face: 0 },face: 0, },
+    { data: { varname: "s",face: 0 },face: 0, },
+    { data: { varname: "s",face: 0 },face: 0, },
+    { data: { varname: "s",face: 0 },face: 0, },
 ]
 //硬币
 var cointrust = {
@@ -379,21 +380,23 @@ var cointrust = {
             type: 'html-button-response',
             data: jsPsych.timelineVariable('data'),
             stimulus: function() {
-                var html = '<div id="euro" class="'+jsPsych.timelineVariable('face')+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
+                var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>报告者</td><td>0.5</td><td>2</td></tr><tr><td>接收者</td><td>0.5</td><td>0</td></tr></tbody></table><div id="euro" class="trans'+jsPsych.timelineVariable('face')+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
+
                 return html;
             },
             prompt: '你认为你的搭档将会报告哪一面',
             choices:['国徽面', '数字面'],
+            button_html:'<button class="jspsych-btn">%choice%</button>'
         },
         {
             type: 'html-keyboard-response',
             stimulus: '继续……',
             choices: jsPsych.NO_KEYS,
-            trial_duration: Math.floor(Math.random()*1000+1000),
+            trial_duration: Math.floor(Math.random()*1000+4000),
         },
         ],
     // trial presentation
-    randomize_order: false
+    randomize_order: true
 }
 
 
@@ -416,9 +419,9 @@ var demographics = {
 
 var main_timeline = [
     set_html_style,
-    /*open_fullscreen,
+    open_fullscreen,
     welcome,
-    warmup,
+    /*warmup,
     demographics,*/
     cointrust,
     warmup,

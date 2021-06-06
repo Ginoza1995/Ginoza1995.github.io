@@ -29,6 +29,9 @@ body {
     top: 15%;
     right: 20%;
 }
+.disable {
+    pointer-events: none;
+}
 #euro {
     width: 150px;
     height: 150px;
