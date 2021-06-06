@@ -213,26 +213,26 @@ var School = {
     on_finish: function(data) { replaceComma(data) }
 }*/
 
-var SWLS = {
+var SSGS = {
     timeline: [{
         type: 'html-slider-response',
         data: jsPsych.timelineVariable('data'),
         stimulus: jsPsych.timelineVariable('s'),
         prompt: `
         <p style="font-size: 16pt; font-weight: normal">
-        请表明你对该陈述的同意程度<br/>
+        请基于你此时此刻的感受，表明你对下列陈述的同意程度<br/>
         （1 = 非常不同意，7 = 非常同意）</p>`,
-        choices: ['1', '2', '3', '4', '5', '6', '7'],
+        choices: ['1', '2', '3', '4', '5'],
         //当你要记录likert量表的多个问题答案时，可以用addRespFromButtonScale(data,'你的量表名var空格后的名字')
         on_finish: function(data) { addRespFromButtonScale(data, 'SWLS') },
         post_trial_gap: 50
     }],
     timeline_variables: [
-        { data: { i: 1 }, s: '我的生活在大多数情况下接近我的理想状态' },
-        { data: { i: 2 }, s: '我的生活条件非常好' },
-        { data: { i: 3 }, s: '我对我的生活感到满意' },
-        { data: { i: 4 }, s: '目前为止我已经得到了生活中我想得到的重要东西' },
-        { data: { i: 5 }, s: '如果生活可以重来，我还愿意过现在这样的生活' },
+        { data: { i: 1 }, s: '我好想找个地洞钻进去，从这里消失' },
+        { data: { i: 2 }, s: '我觉得自己很渺小' },
+        { data: { i: 3 }, s: '我感觉自己是个糟糕的人' },
+        { data: { i: 4 }, s: '我感到难堪、丢脸' },
+        { data: { i: 5 }, s: '我感到没有价值，没有力量' },
     ],
     randomize_order: false
 }
