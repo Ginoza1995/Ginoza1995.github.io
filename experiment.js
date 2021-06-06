@@ -394,7 +394,7 @@ var cointrust = {
             type: 'html-keyboard-response',
             stimulus: '继续……',
             choices: jsPsych.NO_KEYS,
-            trial_duration: Math.floor(Math.random()*1000+4000),
+            trial_duration: Math.floor(Math.random()*1000+1000),
         },
         ],
     // trial presentation
