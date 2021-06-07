@@ -38,7 +38,8 @@ body {
     margin-left: 115px;transform-style: preserve-3d;
     animation: spin 1s linear infinite;
     animation-iteration-count: 2;
-    margin-top: 80px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .back {
     background-image: url("images/backeuro.png");
@@ -46,7 +47,7 @@ body {
     height: 150px;
 }
 .trans1 {
-    transform: rotateY(180deg);
+    transform: rotateY(360deg);
 }
 .trans0 {
     transform: rotateY(180deg);

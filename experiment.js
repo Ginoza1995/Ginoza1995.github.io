@@ -257,16 +257,16 @@ var test_st2 = [
 ]
 
 var coinlist = [
-    { data: { varname: "z",face: 1 }, s0:0.5, s1:0, r0:1, r1:1, },
-    { data: { varname: "z",face: 0 }, s0:0.5, s1:1, r0:0.5, r1:0.5, },
-    { data: { varname: "z",face: 1 }, s0:2, s1:1, r0:0.5, r1:0.5, },
-    { data: { varname: "z",face: 0 }, s0:1, s1:2, r0:1, r1:1, },
-    { data: { varname: "s",face: 1 }, s0:0.5, s1:0.5, r0:2, r1:1, },
-    { data: { varname: "s",face: 0 }, s0:1, s1:1, r0:0, r1:1, },
-    { data: { varname: "s",face: 1 }, s0:0.5, s1:0.5, r0:1, r1:-1, },
-    { data: { varname: "s",face: 0 }, s0:2, s1:2, r0:-1, r1:2, },
-    { data: { varname: "s",face: 1 }, s0:1.5, s1:1.5, r0:1, r1:0, },
-    { data: { varname: "s",face: 0 }, s0:1, s1:1, r0:0, r1:1, },
+    { data: { varname: "z",face: 1 }, s0:0.5, s1:0, r0:1, r1:1, face: 1 },
+    { data: { varname: "z",face: 0 }, s0:0.5, s1:1, r0:0.5, r1:0.5, face: 0 },
+    { data: { varname: "z",face: 1 }, s0:2, s1:-1, r0:0.5, r1:0.5, face: 1 },
+    { data: { varname: "z",face: 0 }, s0:1, s1:2, r0:1, r1:1, face: 0 },
+    { data: { varname: "s",face: 1 }, s0:0.5, s1:0.5, r0:2, r1:1, face: 1 },
+    { data: { varname: "s",face: 0 }, s0:1, s1:1, r0:0, r1:1, face: 0 },
+    { data: { varname: "s",face: 1 }, s0:0.5, s1:0.5, r0:1, r1:-1, face: 1 },
+    { data: { varname: "s",face: 0 }, s0:2, s1:2, r0:-1, r1:2, face: 0 },
+    { data: { varname: "s",face: 1 }, s0:1.5, s1:1.5, r0:1, r1:0, face: 1 },
+    { data: { varname: "s",face: 0 }, s0:1, s1:1, r0:0, r1:1,face: 0 },
 
 ]
 //硬币
@@ -276,7 +276,7 @@ var cointrust = {
             type: 'html-button-response',
             data: jsPsych.timelineVariable('data'),
             stimulus: function() {
-                var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>报告者（搭档）</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>接收者（你）</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><div id="euro" class="trans'+jsPsych.timelineVariable('data', true).face+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
+                var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>报告者（搭档）</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>接收者（你）</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><div id="euro" class="trans'+jsPsych.timelineVariable('face')+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
                 return html;
             },
             prompt: '你认为你的搭档将会报告哪一面',
@@ -336,7 +336,7 @@ var test = {
     ]
 }
 
-var preload = {
+var pre = {
     type: 'preload',
     trials:[shame_test1,shame_test2,cointrust],
 }
@@ -344,7 +344,7 @@ var preload = {
 var main_timeline = [
     set_html_style,
     open_fullscreen,
-    preload,
+    pre,
     welcome,
     /*warmup,
     demographics,*/
