@@ -290,7 +290,9 @@ var cointrust = {
         },
         ],
     // trial presentation
-    randomize_order: true
+    randomize_order: true,
+    repetitions: 2,
+
 }
 
 var shame_test1 = {
