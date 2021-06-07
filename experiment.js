@@ -170,8 +170,8 @@ var Age = {
     oninput="if(value.length>2) value=value.slice(0,2)" required style="font-size:20px" /></p>`,
     button_label: '继续',
         //此处需要注意name="Q0",下面这个语段是记录被试的回答，且只记录单个答案，且通过name="Q0"定位
-/*    on_finish: function(data) { addRespFromSurvey(data) }
-*/}
+    on_finish: function(data) { addRespFromSurvey(data) }
+}
 
 var AName = {
     type: 'survey-html-form',
@@ -206,8 +206,8 @@ var School = {
     <option>其他</option>
     </select></p>`,
     button_label: '继续',
-/*    on_finish: function(data) { addRespFromSurvey(data) }
-*/}
+    on_finish: function(data) { addRespFromSurvey(data) }
+}
 
 
 var SSGS = {
@@ -244,7 +244,7 @@ var OpenEnded = {
         required: false
     }],
     button_label: '完成',
-    on_finish: function(data) { /*addRespFromSurvey(data);*/data.value = new Date().toLocaleTimeString() }
+    on_finish: function(data) { addRespFromSurvey(data);data.value = new Date().toLocaleTimeString() }
 }
 
 var test_st1 = [
