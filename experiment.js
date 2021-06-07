@@ -201,18 +201,6 @@ var School = {
     on_finish: function(data) { addRespFromSurvey(data) }
 }
 
-/*var Language = {
-    type: 'survey-multi-select',
-    data: { varname: 'Language' },
-    questions: [{
-        prompt: '你会哪些语言？',
-        options: ['汉语', '英语', '日语', '韩语', '西班牙语', '其他'],
-        horizontal: false,
-        required: false
-    }],
-    button_label: '继续',
-    on_finish: function(data) { replaceComma(data) }
-}*/
 
 var SSGS = {
     timeline: [{
@@ -251,95 +239,21 @@ var OpenEnded = {
     on_finish: function(data) { addRespFromSurvey(data) }
 }
 
-
-/* Blocks: Experiments */
-
-// Stimuli
-
-/*var EAST_attrib_words = [
-    { data: { stim_type: 'pos' }, s: '健康' },
-    { data: { stim_type: 'pos' }, s: '快乐' },
-    { data: { stim_type: 'pos' }, s: '美好' },
-    { data: { stim_type: 'neg' }, s: '邪恶' },
-    { data: { stim_type: 'neg' }, s: '吝啬' },
-    { data: { stim_type: 'neg' }, s: '卑鄙' },
+var test_st1 = [
+    {img:"images/d11.png" },
+    {img:"images/d12.png" },
+    {img:"images/e10.png" },
+    {img:"images/e12.png" },
+    {img:"images/g15.png" },
 ]
 
-var blu = 'rgb(0, 125, 150)'
-var grn = 'rgb(0, 150, 125)'
-var EAST_target_words = [
-    { data: { stim_type: blu, x: 'a' }, s: '玫瑰' },
-    { data: { stim_type: blu, x: 'a' }, s: '牡丹' },
-    { data: { stim_type: blu, x: 'b' }, s: '空气' },
-    { data: { stim_type: blu, x: 'b' }, s: '土地' },
-    { data: { stim_type: blu, x: 'c' }, s: '蟑螂' },
-    { data: { stim_type: blu, x: 'c' }, s: '蚊子' },
-    { data: { stim_type: grn, x: 'a' }, s: '玫瑰' },
-    { data: { stim_type: grn, x: 'a' }, s: '牡丹' },
-    { data: { stim_type: grn, x: 'b' }, s: '空气' },
-    { data: { stim_type: grn, x: 'b' }, s: '土地' },
-    { data: { stim_type: grn, x: 'c' }, s: '蟑螂' },
-    { data: { stim_type: grn, x: 'c' }, s: '蚊子' },
-]
-
-var tag_LR1 = `<div class="tag-left">按“F”键:<br/>积极词</div>
-               <div class="tag-right">按“J”键:<br/>消极词</div>`
-
-var tag_LR2 = `<div class="tag-left">按“F”键:<br/><span style="color:${blu}">蓝色</span></div>
-               <div class="tag-right">按“J”键:<br/><span style="color:${grn}">绿色</span></div>`
-
-var tag_LR3 = `<div class="tag-left">按“F”键:<br/>积极词<br/>或<br/><span style="color:${blu}">蓝色</span></div>
-               <div class="tag-right">按“J”键:<br/>消极词<br/>或<br/><span style="color:${grn}">绿色</span></div>`
-
-// Instructions
-// Exp. Blocks
-
-var EAST_prac1 = {
-    // stimulus items
-    timeline_variables: EAST_attrib_words,
-    // single trial
-    timeline: [{
-            // fixation
-            type: 'html-keyboard-response',
-            stimulus: '+',
-            choices: jsPsych.NO_KEYS,
-            prompt: tag_LR1,
-            trial_duration: 500,
-            post_trial_gap: 0,
-            response_ends_trial: false
-        },
-        {
-            // word stimulus
-            type: 'categorize-html',
-            data: jsPsych.timelineVariable('data'),
-            stimulus: jsPsych.timelineVariable('s'),
-            choices: ['f', 'j'],
-            key_answer: function() {
-                switch (jsPsych.timelineVariable('data', true).stim_type) {
-                    case 'pos':
-                        return keyCode('f')
-                    case 'neg':
-                        return keyCode('j')
-                }
-            },
-            prompt: tag_LR1,
-            correct_text: tag_LR1 + feedback_right,
-            incorrect_text: tag_LR1 + feedback_wrong,
-            feedback_duration: 500,
-            force_correct_button_press: true
-        },
-    ],
-    // trial presentation
-    repetitions: 2,
-    randomize_order: true
-}*/
-
-var rawen = [
-    {img: }
-    {img: }
-    {img: }
-    {img: }
-    {img: }
+var test_st2 = [
+    {img:"images/m12.png" },
+    {img:"images/m16.png" },
+    {img:"images/m18.png" },
+    {img:"images/m23.png" },
+    {img:"images/m35.png" },
+    {img:"images/m36.png" },
 ]
 
 var coinlist = [
@@ -362,13 +276,11 @@ var cointrust = {
             type: 'html-button-response',
             data: jsPsych.timelineVariable('data'),
             stimulus: function() {
-                var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>报告者</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>接收者（你）</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><div id="euro" class="trans'+jsPsych.timelineVariable('data', true).face+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
-
+                var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>报告者</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>接收者（你）</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><div id="euro" class="trans'+jsPsych.timelineVariable('data', true).face+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div><script>start()</script>';
                 return html;
             },
             prompt: '你认为你的搭档将会报告哪一面',
             choices:['国徽面', '数字面'],
-            button_html:'<button class="jspsych-btn">%choice%</button>'
         },
         {
             type: 'html-keyboard-response',
@@ -381,7 +293,32 @@ var cointrust = {
     randomize_order: true
 }
 
+var shame_test1 = {
+    timeline_variables: test_st1,
+    timeline:[{
+        type: 'html-button-response',
+        stimulus:function(){
+            var html = '<img src="'+jsPsych.timelineVariable("img")+'"></img>';
+            return html;
+        },
+        choices:['1','2','3','4','5','6','7','8'],
+        prompt: '请选择最合适的图片',
+    }]
 
+}
+
+var shame_test2 = {
+    timeline_variables: test_st2,
+    timeline:[{
+        type: 'html-button-response',
+        stimulus:function(){
+            var html = '<img src="'+jsPsych.timelineVariable("img")+'"></img>';
+            return html;
+        },
+        choices:['A','B','C','D','E','F','G','H'],
+        prompt: '请选择最合适的图片',
+    }]
+}
 
 /* Combine Timelines */
 
@@ -391,12 +328,11 @@ var demographics = {
     ]
 }
 
-/*var surveys = {
+var test = {
     timeline: [
-        NameLiking, RSES, SWLS,
-        debrief1,
+        shame_test1,shame_test2,
     ]
-}*/
+}
 
 
 var main_timeline = [
@@ -407,8 +343,8 @@ var main_timeline = [
     demographics,*/
     cointrust,
     warmup,
-    /*surveys,
-    OpenEnded,*/
+    test,
+    OpenEnded,
     close_fullscreen,
 ]
 
