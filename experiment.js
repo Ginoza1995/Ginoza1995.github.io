@@ -10,9 +10,7 @@ const feedback_right = `<span style="position: absolute; top: 55%; left: 0; righ
 
 const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: red"> X </span>`
 
-const subID = jsPsych.randomization.randomID(8)
-
-
+var subName=''
 /* Blocks: HTML DOM Settings */
 
 var set_html_style = {
@@ -172,10 +170,20 @@ var Age = {
     oninput="if(value.length>2) value=value.slice(0,2)" required style="font-size:20px" /></p>`,
     button_label: '继续',
         //此处需要注意name="Q0",下面这个语段是记录被试的回答，且只记录单个答案，且通过name="Q0"定位
-    on_finish: function(data) { addRespFromSurvey(data) }
+/*    on_finish: function(data) { addRespFromSurvey(data) }
+*/}
+
+var AName = {
+    type: 'survey-html-form',
+    data: { varname: 'Name' },
+    preamble: '你的姓名',
+    html: `<p><input name="Q0" type="text
+    " required style="font-size: 20px;" placeholder="姓名"></p>`,
+    button_label: '继续',
+    on_finish: function(data) {subName = data.responses }
 }
 
-var Email = {
+/*var Email = {
     type: 'survey-html-form',
     data: { varname: 'Email' },
     preamble: '你的邮箱',
@@ -183,14 +191,14 @@ var Email = {
     button_label: '继续',
     //此处需要注意name="Q0",下面这个语段是记录被试的回答，且只记录单个答案，且通过name="Q0"定位
     on_finish: function(data) { addRespFromSurvey(data) }
-}
+}*/
 
 var School = {
     type: 'survey-html-form',
     data: { varname: 'School' },
     preamble: '你的最高学历',
     html: `
-    <p><select name="Q0" size=10>
+    <p><select name="Q0" size=10 style="font-size:20px;">
     <option>大专及大专在读</option>
     <option>本科及本科在读</option>
     <option>硕士及硕士在读</option>
@@ -198,8 +206,8 @@ var School = {
     <option>其他</option>
     </select></p>`,
     button_label: '继续',
-    on_finish: function(data) { addRespFromSurvey(data) }
-}
+/*    on_finish: function(data) { addRespFromSurvey(data) }
+*/}
 
 
 var SSGS = {
@@ -230,13 +238,13 @@ var OpenEnded = {
     type: 'survey-text',
     data: { varname: 'OpenEnded' },
     questions: [{
-        prompt: '实验已全部完成，请你猜测本实验的研究目的：',
+        prompt: '实验已全部完成，你可以分享任何疑问、想法或是对实验目的的猜测：',
         rows: 5,
         columns: 50,
         required: false
     }],
     button_label: '完成',
-    on_finish: function(data) { addRespFromSurvey(data) }
+    on_finish: function(data) { /*addRespFromSurvey(data);*/data.value = new Date().toLocaleTimeString() }
 }
 
 var test_st1 = [
@@ -281,12 +289,7 @@ var cointrust = {
             },
             prompt: '你认为你的搭档将会报告哪一面',
             choices:['国徽面', '数字面'],
-        },
-        {
-            type: 'html-keyboard-response',
-            stimulus: '继续……',
-            choices: jsPsych.NO_KEYS,
-            trial_duration: Math.floor(Math.random()*1000+1000),
+            post_trial_gap: 200,
         },
         ],
     // trial presentation
@@ -326,7 +329,7 @@ var shame_test2 = {
 
 var demographics = {
     timeline: [
-        Sex, Age,  School, Email,
+        AName, Sex, Age,  School, 
     ]
 }
 
@@ -346,11 +349,11 @@ var main_timeline = [
     open_fullscreen,
     pre,
     welcome,
-    /*warmup,
-    demographics,*/
     warmup,
-    cointrust,
-    test,
+    demographics,
+    warmup,
+    /*cointrust,
+    test,*/
     OpenEnded,
     close_fullscreen,
 ]
@@ -361,7 +364,7 @@ var main_timeline = [
 jsPsych.init({
     timeline: main_timeline,
     on_finish: function() {
-        jsPsych.data.get().localSave('csv', `data_exp_demo_${subID}.csv`) // download from browser
+        jsPsych.data.get().localSave('csv', `data_exp_demo_${subName}.csv`) // download from browser
         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
     }
 })
