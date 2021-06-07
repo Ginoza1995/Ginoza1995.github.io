@@ -116,10 +116,21 @@ var close_fullscreen = {
     delay_after: 0
 }
 
-var instr_shame = {
+var instr_ms = {
     type: 'instructions',
     pages: [
-        `<p>羞耻唤起任务</p>`,
+        `<p>道德羞耻唤起</p>`,
+    ],
+    show_clickable_nav: true,
+    allow_backward: false,
+    button_label_previous: '返回',
+    button_label_next: '继续'
+}
+
+var instr_as = {
+    type: 'instructions',
+    pages: [
+        `<p>接下来要做的是一个有趣的练习，请看下面的例题。</p><p>在这张图中，上面的图像是缺了一部分的，图案下面的小图片的形状都与上图所缺部分一样，但内容不同，不是每一张小图片都能补全上面的图案。请看第一张小图片，显然不行，第二、三张也对不上，第六张好像可以，但也有一小块空白。最后只有第四张是最合适的，所以，此题正确答案是4。</p>`,
     ],
     show_clickable_nav: true,
     allow_backward: false,
@@ -163,16 +174,6 @@ var Age = {
         //此处需要注意name="Q0",下面这个语段是记录被试的回答，且只记录单个答案，且通过name="Q0"定位
     on_finish: function(data) { addRespFromSurvey(data) }
 }
-
-/*var Birth = {
-    type: 'survey-html-form',
-    data: { varname: 'Birth' },
-    preamble: '你的生日',
-    html: '<p><input name="Q0" type="date" value="2000-01-01" required /></p>',
-    button_label: '继续',
-    //此处需要注意name="Q0",下面这个语段是记录被试的回答，且只记录单个答案，且通过name="Q0"定位
-    on_finish: function(data) { addRespFromSurvey(data) }
-}*/
 
 var Email = {
     type: 'survey-html-form',
@@ -224,7 +225,7 @@ var SSGS = {
         （1 = 非常不同意，7 = 非常同意）</p>`,
         choices: ['1', '2', '3', '4', '5'],
         //当你要记录likert量表的多个问题答案时，可以用addRespFromButtonScale(data,'你的量表名var空格后的名字')
-        on_finish: function(data) { addRespFromButtonScale(data, 'SWLS') },
+        on_finish: function(data) { addRespFromButtonScale(data, 'SSGS') },
         post_trial_gap: 50
     }],
     timeline_variables: [
@@ -232,35 +233,7 @@ var SSGS = {
         { data: { i: 2 }, s: '我觉得自己很渺小' },
         { data: { i: 3 }, s: '我感觉自己是个糟糕的人' },
         { data: { i: 4 }, s: '我感到难堪、丢脸' },
-        { data: { i: 5 }, s: '我感到没有价值，没有力量' },
-    ],
-    randomize_order: false
-}
-
-var RSES = {
-    timeline: [{
-        type: 'html-button-response',
-        data: jsPsych.timelineVariable('data'),
-        stimulus: jsPsych.timelineVariable('s'),
-        prompt: `
-        <p style="font-size: 16pt; font-weight: normal">
-        请表明你对该陈述的同意程度<br/>
-        （1 = 非常不同意，4 = 非常同意）</p>`,
-        choices: ['1', '2', '3', '4'],
-        on_finish: function(data) { addRespFromButtonScale(data, 'RSES') },
-        post_trial_gap: 50
-    }],
-    timeline_variables: [
-        { data: { i: 1 }, s: '我认为自己是个有价值的人，至少与别人不相上下' },
-        { data: { i: 2 }, s: '我觉得我有许多优点' },
-        { data: { i: 3 }, s: '总的来说，我倾向于认为自己是一个失败者' },
-        { data: { i: 4 }, s: '我做事可以做得和大多数人一样好' },
-        { data: { i: 5 }, s: '我觉得自己没有什么值得自豪的地方' },
-        { data: { i: 6 }, s: '我对自己持有一种肯定的态度' },
-        { data: { i: 7 }, s: '整体而言，我对自己感到满意' },
-        { data: { i: 8 }, s: '我本应该对自己尊重更多一些' },
-        { data: { i: 9 }, s: '有时我的确感到自己没用了' },
-        { data: { i: 10 }, s: '有时我认为自己一无是处' },
+        { data: { i: 5 }, s: '我觉得自己毫无价值，缺少力量' },
     ],
     randomize_order: false
 }
@@ -269,8 +242,7 @@ var OpenEnded = {
     type: 'survey-text',
     data: { varname: 'OpenEnded' },
     questions: [{
-        prompt: '实验已全部完成，你可以分享任何疑问或想法：',
-        placeholder: '非必答',
+        prompt: '实验已全部完成，请你猜测本实验的研究目的：',
         rows: 5,
         columns: 50,
         required: false
@@ -361,6 +333,14 @@ var EAST_prac1 = {
     repetitions: 2,
     randomize_order: true
 }*/
+
+var rawen = [
+    {img: }
+    {img: }
+    {img: }
+    {img: }
+    {img: }
+]
 
 var coinlist = [
     { data: { varname: "z",face: 1 }, s0:0.5, s1:0, r0:1, r1:1, },
