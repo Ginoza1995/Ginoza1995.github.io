@@ -345,14 +345,13 @@ var pre = {
 
 var main_timeline = [
     set_html_style,
-    open_fullscreen,
+    /*open_fullscreen,*/
     pre,
-    welcome,
+/*    welcome,
     warmup,
-    demographics,
-    warmup,
-    cointrust,
+    demographics,*/
     test,
+    cointrust,
     OpenEnded,
     close_fullscreen,
 ]
