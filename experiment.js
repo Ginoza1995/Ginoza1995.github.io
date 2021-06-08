@@ -243,7 +243,7 @@ var OpenEnded = {
         required: false
     }],
     button_label: '完成',
-    on_finish: function(data) { data.value = data.response.Q0;data.value = new Date().toLocaleTimeString() }
+    on_finish: function(data) { data.response = data.response.Q0;data.value = new Date().toLocaleTimeString() }
 }
 
 var test_st1 = [
@@ -286,7 +286,7 @@ var cointrust = {
                 var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>报告者（搭档）</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>接收者（你）</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><div id="euro" class="trans'+jsPsych.timelineVariable('face')+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
                 return html;
             },
-            prompt: '你认为你的搭档将会报告哪一面',
+            prompt: '实际掷出情况如上图，你认为你的搭档将会报告哪一面',
             choices:['国徽面', '数字面'],
             post_trial_gap: 200,
         },
@@ -328,7 +328,7 @@ var shame_test2 = {
 
 var demographics = {
     timeline: [
-        /*AName, Sex,*/ Age,  School, 
+        AName, Sex, Age,  School, 
     ]
 }
 
