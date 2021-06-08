@@ -169,8 +169,7 @@ var Age = {
     <p><input name="Q0" type="number" placeholder="15~99" min=15 max=99
     oninput="if(value.length>2) value=value.slice(0,2)" required style="font-size:20px" /></p>`,
     button_label: '继续',
-        //此处需要注意name="Q0",下面这个语段是记录被试的回答，且只记录单个答案，且通过name="Q0"定位
-    on_finish: function(data) { addRespFromSurvey(data) }
+    on_finish: function(data) { data.value = data.response.Q0 }
 }
 
 var AName = {
@@ -180,7 +179,7 @@ var AName = {
     html: `<p><input name="Q0" type="text
     " required style="font-size: 20px;" placeholder="姓名"></p>`,
     button_label: '继续',
-    on_finish: function(data) {subName = data.responses }
+    on_finish: function(data) {subName = data.response.Q0 }
 }
 
 /*var Email = {
@@ -199,14 +198,14 @@ var School = {
     preamble: '你的最高学历',
     html: `
     <p><select name="Q0" size=10 style="font-size:20px;">
-    <option>大专及大专在读</option>
-    <option>本科及本科在读</option>
-    <option>硕士及硕士在读</option>
-    <option>硕士以上</option>
-    <option>其他</option>
+    <option value="2">大专及大专在读</option>
+    <option value="3">本科及本科在读</option>
+    <option value="4">硕士及硕士在读</option>
+    <option value="5">硕士以上</option>
+    <option value="1">其他</option>
     </select></p>`,
     button_label: '继续',
-    on_finish: function(data) { addRespFromSurvey(data) }
+    on_finish: function(data) { data.value = data.response.Q0}
 }
 
 
@@ -244,7 +243,7 @@ var OpenEnded = {
         required: false
     }],
     button_label: '完成',
-    on_finish: function(data) { addRespFromSurvey(data);data.value = new Date().toLocaleTimeString() }
+    on_finish: function(data) { data.value = data.response.Q0;data.value = new Date().toLocaleTimeString() }
 }
 
 var test_st1 = [
@@ -329,7 +328,7 @@ var shame_test2 = {
 
 var demographics = {
     timeline: [
-        AName, Sex, Age,  School, 
+        /*AName, Sex,*/ Age,  School, 
     ]
 }
 
@@ -352,8 +351,8 @@ var main_timeline = [
     warmup,
     demographics,
     warmup,
-    /*cointrust,
-    test,*/
+    cointrust,
+    test,
     OpenEnded,
     close_fullscreen,
 ]
@@ -364,7 +363,7 @@ var main_timeline = [
 jsPsych.init({
     timeline: main_timeline,
     on_finish: function() {
-        jsPsych.data.get().localSave('csv', `data_exp_demo_${subName}.csv`) // download from browser
+        jsPsych.data.get().localSave('csv', `ST_${subName}.csv`) // download from browser
         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
     }
 })

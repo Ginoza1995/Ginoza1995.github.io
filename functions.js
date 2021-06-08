@@ -43,26 +43,19 @@ function timer() {
 
 function addRespFromButton(data) {
     // compute variables from button-plugin response (for simple item)
-    data.response = parseInt(data.button_pressed) + 1 // raw: 0, 1, 2, ...
+    data.response = parseInt(data.response) + 1 // raw: 0, 1, 2, ...
 }
 
 function addRespFromButtonScale(data, scale_name, var_i = 'i') {
     // compute variables from button-plugin response (for likert scale)
     data.scale = scale_name
     data.varname = scale_name + data[var_i]
-    data.response = parseInt(data.button_pressed) + 1 // raw: 0, 1, 2, ...
-}
-
-function addRespFromSurvey(data, parse_int = false) {
-    // only for single response ('Q0' in survey-plugin responses)
-    var resp = String(JSON.parse(data.responses).Q0)
-    data.responses = resp
-    data.response = (parse_int) ? resp.match(/\d+/) : resp
+    data.response = parseInt(data.response) + 1 // raw: 0, 1, 2, ...
 }
 
 function replaceComma(data, sep = '|') {
     // only for single response ('Q0' in survey-plugin responses)
-    data.responses = String(JSON.parse(data.responses).Q0).split(',').join(sep)
+    data.response = String(JSON.parse(data.response).Q0).split(',').join(sep)
 }
 
 function setSliderAttr(event = 'onmouseup') {
