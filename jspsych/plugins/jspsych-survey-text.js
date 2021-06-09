@@ -73,6 +73,12 @@ jsPsych.plugins['survey-text'] = (function() {
         default:  'Continue',
         description: 'The text that appears on the button to finish the trial.'
       },
+      required_word: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'Required word length',
+        default:  null,
+        description: 'The least word you need to text in.'
+      },
       autocomplete: {
         type: jsPsych.plugins.parameterType.BOOL,
         pretty_name: 'Allow autocomplete',
@@ -129,15 +135,29 @@ jsPsych.plugins['survey-text'] = (function() {
       var autofocus = i == 0 ? "autofocus" : "";
       var req = question.required ? "required" : "";
       if(question.rows == 1){
-        html += '<input type="text" id="input-'+question_index+'"  name="#jspsych-survey-text-response-' + question_index + '" data-name="'+question.name+'" size="'+question.columns+'" '+autofocus+' '+req+' placeholder="'+question.placeholder+'"></input>';
+        if (trial.required_word) {
+          html += '<input type="text" id="input-'+question_index+'" onkeydown="word_length('+trial.required_word+')" name="#jspsych-survey-text-response-' + question_index + '" data-name="'+question.name+'" size="'+question.columns+'" '+autofocus+' '+req+' placeholder="'+question.placeholder+'"></input>';}
+        else{
+           html += '<input type="text" id="input-'+question_index+'"  name="#jspsych-survey-text-response-' + question_index + '" data-name="'+question.name+'" size="'+question.columns+'" '+autofocus+' '+req+' placeholder="'+question.placeholder+'"></input>';
+        }
       } else {
-        html += '<textarea id="input-'+question_index+'" name="#jspsych-survey-text-response-' + question_index + '" data-name="'+question.name+'" cols="' + question.columns + '" rows="' + question.rows + '" '+autofocus+' '+req+' placeholder="'+question.placeholder+'"></textarea>';
+        if (trial.required_word){
+          html += '<textarea id="input-'+question_index+'" onkeydown="word_length('+trial.required_word+')" name="#jspsych-survey-text-response-' + question_index + '" data-name="'+question.name+'" cols="' + question.columns + '" rows="' + question.rows + '" '+autofocus+' '+req+' placeholder="'+question.placeholder+'"></textarea>';
+        } else {
+          html += '<textarea id="input-'+question_index+'" name="#jspsych-survey-text-response-' + question_index + '" data-name="'+question.name+'" cols="' + question.columns + '" rows="' + question.rows + '" '+autofocus+' '+req+' placeholder="'+question.placeholder+'"></textarea>';
+        }
+        
       }
       html += '</div>';
     }
 
     // add submit button
-    html += '<input type="submit" id="jspsych-survey-text-next" class="jspsych-btn jspsych-survey-text" value="'+trial.button_label+'"></input>';
+    if (trial.required_word) {
+      html += '<input type="submit" id="jspsych-survey-text-next" disabled class="jspsych-btn jspsych-survey-text" value="'+trial.button_label+'"></input>';
+    } else {
+      html += '<input type="submit" id="jspsych-survey-text-next" class="jspsych-btn jspsych-survey-text" value="'+trial.button_label+'"></input>';
+    }
+    
 
     html += '</form>'
     display_element.innerHTML = html;

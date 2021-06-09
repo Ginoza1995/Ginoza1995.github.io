@@ -10,6 +10,9 @@ const feedback_right = `<span style="position: absolute; top: 55%; left: 0; righ
 
 const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: red"> X </span>`
 
+//0、1随机分配被试组别，0为能力组，1为道德组，2为控制组。
+const condition =  Math.round(Math.random())*2
+
 var subName=''
 /* Blocks: HTML DOM Settings */
 
@@ -127,6 +130,7 @@ var instr_ms = {
 
 var instr_as = {
     type: 'instructions',
+    data: { varname: 'ability'},
     pages: [
         `<p>接下来要做的是一个有趣的练习，请看下面的例题。</p><p>在这张图中，上面的图像是缺了一部分的，图案下面的小图片的形状都与上图所缺部分一样，但内容不同，不是每一张小图片都能补全上面的图案。请看第一张小图片，显然不行，第二、三张也对不上，第六张好像可以，但也有一小块空白。最后只有第四张是最合适的，所以，此题正确答案是4。</p>`,
     ],
@@ -137,15 +141,18 @@ var instr_as = {
 }
 
 var instr_control = {
-    type: 'instructions',
-    pages: [
-        `<p style="text-align: left">
-        中性任务</p>`,
-    ],
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '继续'
+    type: 'survey-text',
+    data: { varname: 'control'},
+    questions: [{
+        prompt: `指导语：</br>请回忆以下这个校园生活中常遇到的场景：你打算在食堂吃饭，在点餐后找到了位置，就坐吃饭。请尽量生动具体地在脑海里想象这个过程，当你能成功地回忆这段经历时，请在下方写下这段经历。请尽量描述每一个细节，你不需要写成一段连贯的文字，也无需描述自己的心情，任何与之相关的细节都可以被记录下来，例如，人流量怎么样、你是如何挑选食物、座位的，等等。<b style="color:#a70b0b">请至少填写150字</b>`,
+        placeholder: `请注意，请尽可能地描述日常大多数时候会发生的细节，而不是某几次偶然发生却给你留下深刻印象的细节`,
+        rows: 10,
+        columns: 120,
+        required: true
+    }],
+    button_label: '继续',
+    required_word:150,
+    on_finish: function(data) { data.value = data.response.Q0 }
 }
 
 
@@ -269,12 +276,18 @@ var coinlist = [
     { data: { varname: "z",face: 0 }, s0:0.5, s1:1, r0:0.5, r1:0.5, face: 0 },
     { data: { varname: "z",face: 1 }, s0:2, s1:-1, r0:0.5, r1:0.5, face: 1 },
     { data: { varname: "z",face: 0 }, s0:1, s1:2, r0:1, r1:1, face: 0 },
+    { data: { varname: "z",face: 0 }, s0:-0.5, s1:1.5, r0:1, r1:1,face: 0 },
     { data: { varname: "s",face: 1 }, s0:0.5, s1:0.5, r0:2, r1:1, face: 1 },
     { data: { varname: "s",face: 0 }, s0:1, s1:1, r0:0, r1:1, face: 0 },
     { data: { varname: "s",face: 1 }, s0:0.5, s1:0.5, r0:1, r1:-1, face: 1 },
     { data: { varname: "s",face: 0 }, s0:2, s1:2, r0:-1, r1:2, face: 0 },
     { data: { varname: "s",face: 1 }, s0:1.5, s1:1.5, r0:1, r1:0, face: 1 },
     { data: { varname: "s",face: 0 }, s0:1, s1:1, r0:0, r1:1,face: 0 },
+    { data: { varname: "sp",face: 1 }, s0:1, s1:1, r0:0, r1:1,face: 1 },
+    { data: { varname: "sp",face: 0 }, s0:0.5, s1:0.5, r0:2, r1:1,face: 0 },
+    { data: { varname: "sp",face: 1 }, s0:0.5, s1:0.5, r0:0, r1:-1,face: 0 },
+    { data: { varname: "sp",face: 0 }, s0:-1, s1:0.5, r0:-1, r1:1,face: 1 },
+    { data: { varname: "sp",face: 1 }, s0:2, s1:3, r0:-1, r1:2,face: 1 },
 
 ]
 //硬币
@@ -333,11 +346,27 @@ var demographics = {
     ]
 }
 
-var test = {
+
+if (condition==0){
+    var test = {
     timeline: [
-        shame_test1,shame_test2,
-    ]
+        instr_as,shame_test1,shame_test2,
+        ]
+    }
+} else if (condition==2){
+    var test = {
+    timeline: [
+        instr_control,shame_test1,shame_test2,
+        ]
+    }
+} else if (condition==1){
+    var test = {
+    timeline: [
+        instr_ms,shame_test1,shame_test2,
+        ]
+    }
 }
+
 
 var pre = {
     type: 'preload',

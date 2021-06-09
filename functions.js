@@ -18,10 +18,10 @@ function inputDialog(title, default_text) {
 }
 
 //survey text 字数限制
-function word_length() {
+function word_length(ws) {
     var n = document.querySelector("#input-0").textLength;
     var btn = document.querySelector("#jspsych-survey-text-next")
-    if(n<50){
+    if(n<ws){
       btn.disabled = true;
       } else {
       btn.disabled = false;
