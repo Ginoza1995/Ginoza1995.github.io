@@ -229,6 +229,7 @@ var SSGS = {
         { data: { i: 3 }, s: '我感觉自己是个糟糕的人' },
         { data: { i: 4 }, s: '我感到难堪、丢脸' },
         { data: { i: 5 }, s: '我觉得自己毫无价值，缺少力量' },
+        { data: { i: 6 }, s: '我感到羞耻' }
     ],
     randomize_order: false
 }
@@ -345,11 +346,11 @@ var pre = {
 
 var main_timeline = [
     set_html_style,
-    /*open_fullscreen,*/
+    open_fullscreen,
     pre,
-/*    welcome,
+    welcome,
     warmup,
-    demographics,*/
+    demographics,
     test,
     cointrust,
     OpenEnded,
