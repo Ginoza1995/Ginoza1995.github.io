@@ -17,7 +17,7 @@ function inputDialog(title, default_text) {
     return input
 }
 
-function countdown(){
+/*function countdown(){
     var a = document.getElementById('timelimit');
     var minutes = Math.floor(mt/60);
     var seconds = Math.floor(mt%60);
@@ -27,9 +27,9 @@ function countdown(){
     if (mt<=0) {
         clearInterval(timelimit);
         alert("时间到，当前测验已结束！确定以继续实验流程，谢谢。")
-        jsPsych.endCurrentTimeline();
+        jsPsych.finishTrial(trial_data);
     } 
-}
+}*/
 //survey text 字数限制
 function word_length(ws) {
     var n = document.querySelector("#input-0").textLength;
