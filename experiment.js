@@ -120,6 +120,7 @@ var close_fullscreen = {
 
 var instr_ms = {
     type: 'instructions',
+    data: { varname: 'moral'},
     pages: [
         `<p>道德羞耻唤起</p>`,
     ],
@@ -156,7 +157,16 @@ var instr_control = {
     on_finish: function(data) { data.value = data.response.Q0 }
 }
 
-
+var instr_coin = {
+    type: 'instructions',
+    pages: [
+        `<p>接下来，你将线上匹配一位搭档来进行猜硬币的游戏。<b style="color:#a70b0b">你是接收者，你的搭档是报告者。</b>报告者的报告情况将决定你们两人的收益，每次游戏的收益情况都会发生变化，<b style="color:#a70b0b">收益表以及硬币面向对于你们两人都可见</b>。</p><img src="images/instr_coin.png"><p>你每猜对一次报告者的选择,将获得0.5的收益。</p>`,
+    ],
+    show_clickable_nav: true,
+    allow_backward: false,
+    button_label_previous: '返回',
+    button_label_next: '继续'
+}
 
 
 /* Blocks: Surveys */
@@ -303,7 +313,7 @@ var cointrust = {
             },
             prompt: '实际掷出情况如上图，你认为你的搭档将会报告哪一面',
             choices:['国徽面', '数字面'],
-            post_trial_gap: 200,
+            post_trial_gap: 400,
         },
         ],
     // trial presentation
@@ -391,6 +401,7 @@ var main_timeline = [
     demographics,
     test,
     cointrust,
+    SSGS,
     OpenEnded,
     close_fullscreen,
 ]
@@ -403,5 +414,8 @@ jsPsych.init({
     on_finish: function() {
         jsPsych.data.get().localSave('csv', `ST_${subName}.csv`) // download from browser
         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
+        if(condition==1){
+            document.getElementById('jspsych-content').innerHTML += '实验过程中图形推理的排名是我们杜撰，并非您的真实能力反应，请勿有任何消极情绪'
+        }
     }
 })
