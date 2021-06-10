@@ -427,8 +427,8 @@ if(condition==0){
 
 var main_timeline = [
     set_html_style,
-    open_fullscreen,
     pre,
+    open_fullscreen,
     welcome,
     warmup,
     demographics,
