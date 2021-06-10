@@ -11,9 +11,9 @@ const feedback_right = `<span style="position: absolute; top: 55%; left: 0; righ
 const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: red"> X </span>`
 
 //0、1随机分配被试组别，0为能力组，1为道德组，2为控制组。
-const condition =  Math.round(Math.random())*2
+const condition = 0 /*Math.round(Math.random())*2*/
 var mt = 360
-
+var timelimit
 var subName=''
 /* Blocks: HTML DOM Settings */
 
@@ -138,7 +138,10 @@ var instr_as = {
     show_clickable_nav: true,
     allow_backward: false,
     button_label_previous: '返回',
-    button_label_next: '继续'
+    button_label_next: '继续',
+    on_finish:function() {
+        timelimit = setInterval("countdown()",1000);
+    }
 }
 
 var instr_control = {
@@ -322,9 +325,9 @@ var shame_test1 = {
         },
         choices:['1','2','3','4','5','6','7','8'],
         prompt: '请选择最合适的图片',
-    }]
+    }],
+    }
 
-}
 
 var shame_test2 = {
     timeline_variables: test_st2,
@@ -353,24 +356,17 @@ if (condition==0){
     timeline: [
         instr_as,shame_test1,shame_test2,
         ],
-    on_timeline_start: function() {
-       var timelimit = setInterval("countdown()",1000); }
     }
 } else if (condition==2){
     var test = {
     timeline: [
         instr_control,shame_test1,shame_test2,
-        ]
-    on_timeline_start: function() {
-       var timelimit = setInterval("countdown()",1000); }
-    }
+        ],}
 } else if (condition==1){
     var test = {
     timeline: [
         instr_ms,shame_test1,shame_test2,
-        ]
-    on_timeline_start: function() {
-       var timelimit = setInterval("countdown()",1000); }
+        ],
     }
 }
 
@@ -387,8 +383,8 @@ var main_timeline = [
     welcome,
     warmup,
     demographics,
-    test,
-    cointrust,
+    test,/*
+    cointrust,*/
     OpenEnded,
     close_fullscreen,
 ]
