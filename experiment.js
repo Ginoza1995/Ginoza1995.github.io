@@ -133,13 +133,12 @@ var instr_as = {
     type: 'instructions',
     data: { varname: 'ability'},
     pages: [
-        `<p>接下来要做的是一个有趣的练习，请看下面的例题。</p><img src="images/例.png"><p>在这张图中，上面的图像是缺了一部分的，图案下面的小图片的形状都与上图所缺部分一样，但内容不同，不是每一张小图片都能补全上面的图案。请看第一张小图片，显然不行，第二、三张也对不上，第六张好像可以，但也有一小块空白。最后只有第四张是最合适的，所以，此题正确答案是4。</p>`,
+        `<p>接下来要做的是一个有趣的练习，请看下面的例题。</p><img src="images/例.png"><p>在这张图中，上面的图像是缺了一部分的，图案下面的小图片的形状都与上图所缺部分一样，但内容不同，不是每一张小图片都能补全上面的图案。请看第一张小图片，显然不行，第二、三张也对不上，第六张好像可以，但也有一小块空白。最后只有第四张是最合适的，所以，此题正确答案是4。</p><p><b style="color:#a70b0b">每题限时30秒，请尽力作答</b></p>`,
     ],
     show_clickable_nav: true,
     allow_backward: false,
     button_label_previous: '返回',
     button_label_next: '继续',
-    trial_duration:3000
 }
 
 var instr_control = {
@@ -324,6 +323,7 @@ var shame_test1 = {
         choices:['1','2','3','4','5','6','7','8'],
         prompt: '请选择最合适的图片',
     }],
+    trial_duration:30000,
     }
 
 
@@ -337,7 +337,8 @@ var shame_test2 = {
         },
         choices:['A','B','C','D','E','F','G','H'],
         prompt: '请选择最合适的图片',
-    }]
+    }],
+    trial_duration:30000,
 }
 
 /* Combine Timelines */
@@ -358,21 +359,28 @@ if (condition==0){
 } else if (condition==2){
     var test = {
     timeline: [
-        instr_control,shame_test1,shame_test2,
+        instr_control,
         ],}
 } else if (condition==1){
     var test = {
     timeline: [
-        instr_ms,shame_test1,shame_test2,
+        instr_ms,
         ],
     }
 }
 
-
-var pre = {
+if(condition==0){
+    var pre = {
     type: 'preload',
     trials:[shame_test1,shame_test2,cointrust],
+    }
+} else {
+    var pre = {
+    type: 'preload',
+    trials:[cointrust],
+    }
 }
+
 
 var main_timeline = [
     set_html_style,
@@ -381,8 +389,8 @@ var main_timeline = [
     welcome,
     warmup,
     demographics,
-    test,/*
-    cointrust,*/
+    test,
+    cointrust,
     OpenEnded,
     close_fullscreen,
 ]
