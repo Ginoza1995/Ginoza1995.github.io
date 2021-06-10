@@ -16,6 +16,8 @@ body {
     margin: 1em 0em;
 }
 
+
+
 .tag-left {
     font-size: 24pt;
     position: absolute;
@@ -74,4 +76,21 @@ body {
     100% {
         transform: rotateY(360deg);
     }
+}
+
+//假排名表格
+#rank{
+    width: 100%;
+}
+#rank thead{
+    background-color: black;
+    color: white;
+    text-indent: 14px;
+    text-align: left;
+}
+#rank tbody tr:nth-child(odd){
+    background-color: rgba(0, 255, 0, 0.1);
+}
+#rank tbody tr:nth-child(even){
+    background-color: rgba(255, 0, 0, 0.3);
 }

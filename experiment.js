@@ -15,6 +15,7 @@ const condition = 0 /*Math.round(Math.random())*2*/
 var mt = 360
 var timelimit
 var subName=''
+var xueli=''
 /* Blocks: HTML DOM Settings */
 
 var set_html_style = {
@@ -134,8 +135,40 @@ var instr_as = {
     type: 'instructions',
     data: { varname: 'ability'},
     pages: [
-        `<p>接下来要做的是一个有趣的练习，请看下面的例题。</p><img src="images/例.png"><p>在这张图中，上面的图像是缺了一部分的，图案下面的小图片的形状都与上图所缺部分一样，但内容不同，不是每一张小图片都能补全上面的图案。请看第一张小图片，显然不行，第二、三张也对不上，第六张好像可以，但也有一小块空白。最后只有第四张是最合适的，所以，此题正确答案是4。</p><p><b style="color:#a70b0b">每题限时30秒，请尽力作答</b></p>`,
+        `<p>接下来要做的是一个有趣的测验，每个选项的得分各不同，最低0分，最高5分。请看下面的例题：</p><img src="images/例.png"><p>在这张图中，上面的图像是缺了一部分的，图案下面的小图片的形状都与上图所缺部分一样，但内容不同，不是每一张小图片都能补全上面的图案。请看第一张小图片，显然不行，第二、三张也对不上，第六张好像可以，但也有一小块空白。最后只有第四张是最合适的，所以，4将获得最高得分。</p><p><b style="color:#a70b0b">每题限时30秒，共11题，请尽力作答</b></p>`,
     ],
+    show_clickable_nav: true,
+    allow_backward: false,
+    button_label_previous: '返回',
+    button_label_next: '继续',
+}
+
+var rank = {
+    type: 'instructions',
+    pages: function(){
+        var xl=''
+        switch(xueli){
+            case "1" :
+                xl = "其它";
+                break;
+            case "2":
+                xl = "大专及大专在读";
+                break;
+            case "3":
+                xl = "本科及本科在读";
+                break;
+            case "4":
+                xl = "硕士及硕士在读";
+                break;
+            case "5":
+                xl = "硕士以上";
+                break;
+        }
+        var ads = [];
+        var str = "<table id='rank'><thead><tr><th>名次(55/55)</th><th>姓名</th><th>学历</th><th>分数</th></tr></thead><tbody><tr><td>1</td><td>余庆华</td><td>硕士以上</td><td>55</td></tr><tr><td>1</td><td>施囡</td><td>硕士及硕士在读</td><td>55</td></tr><tr><td>3</td><td>王维俊</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>3</td><td>广姗然</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>5</td><td>王慧敏</td><td>本科及本科在读</td><td>53</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>40</td><td>王汉华</td><td>大专及大专在读</td><td>21</td></tr><tr><td>41</td><td>"+subName+"</td><td>"+xl+"</td><td>20</td></tr><tr><td>41</td><td>秋瑾兰</td><td>其他</td><td>20</td></tr></tbody></table>";
+        ads[0]=str;
+        return ads
+    },
     show_clickable_nav: true,
     allow_backward: false,
     button_label_previous: '返回',
@@ -197,7 +230,7 @@ var AName = {
     html: `<p><input name="Q0" type="text
     " required style="font-size: 20px;" placeholder="姓名"></p>`,
     button_label: '继续',
-    on_finish: function(data) {subName = data.response.Q0 }
+    on_finish: function(data) {subName = data.response.Q0 ;}
 }
 
 /*var Email = {
@@ -223,7 +256,7 @@ var School = {
     <option value="1">其他</option>
     </select></p>`,
     button_label: '继续',
-    on_finish: function(data) { data.value = data.response.Q0}
+    on_finish: function(data) { data.value = data.response.Q0;xueli = data.value}
 }
 
 
@@ -363,7 +396,7 @@ var demographics = {
 if (condition==0){
     var test = {
     timeline: [
-        instr_as,shame_test1,shame_test2,
+        instr_as,shame_test1,shame_test2,rank,
         ],
     }
 } else if (condition==2){
@@ -399,7 +432,7 @@ var main_timeline = [
     welcome,
     warmup,
     demographics,
-    test,
+    test,instr_coin,
     cointrust,
     SSGS,
     OpenEnded,
