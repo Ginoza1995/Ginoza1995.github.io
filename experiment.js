@@ -12,6 +12,7 @@ const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; righ
 
 //0、1随机分配被试组别，0为能力组，1为道德组，2为控制组。
 const condition =  Math.round(Math.random())*2
+var mt = 360
 
 var subName=''
 /* Blocks: HTML DOM Settings */
@@ -316,7 +317,7 @@ var shame_test1 = {
     timeline:[{
         type: 'html-button-response',
         stimulus:function(){
-            var html = '<img src="'+jsPsych.timelineVariable("img")+'"></img>';
+            var html = '<div id="timelimit" style="text-align:center;font-size:15px;margin-bottom:30px;"></div><img src="'+jsPsych.timelineVariable("img")+'"></img>';
             return html;
         },
         choices:['1','2','3','4','5','6','7','8'],
@@ -330,7 +331,7 @@ var shame_test2 = {
     timeline:[{
         type: 'html-button-response',
         stimulus:function(){
-            var html = '<img src="'+jsPsych.timelineVariable("img")+'"></img>';
+            var html = '<div id="timelimit" style="text-align:center;font-size:15px;margin-bottom:30px;"></div><img src="'+jsPsych.timelineVariable("img")+'"></img>';
             return html;
         },
         choices:['A','B','C','D','E','F','G','H'],
@@ -351,19 +352,25 @@ if (condition==0){
     var test = {
     timeline: [
         instr_as,shame_test1,shame_test2,
-        ]
+        ],
+    on_timeline_start: function() {
+       var timelimit = setInterval("countdown()",1000); }
     }
 } else if (condition==2){
     var test = {
     timeline: [
         instr_control,shame_test1,shame_test2,
         ]
+    on_timeline_start: function() {
+       var timelimit = setInterval("countdown()",1000); }
     }
 } else if (condition==1){
     var test = {
     timeline: [
         instr_ms,shame_test1,shame_test2,
         ]
+    on_timeline_start: function() {
+       var timelimit = setInterval("countdown()",1000); }
     }
 }
 

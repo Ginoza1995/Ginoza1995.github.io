@@ -17,6 +17,19 @@ function inputDialog(title, default_text) {
     return input
 }
 
+function countdown(){
+    var a = document.getElementById('timelimit');
+    var minutes = Math.floor(mt/60);
+    var seconds = Math.floor(mt%60);
+    var str = '剩余时间：'+minutes+'分'+seconds+'秒';
+    a.innerHTML=str;
+    --mt;
+    if (mt<=0) {
+        clearInterval(timelimit);
+        alert("时间到，当前测验已结束！确定以继续实验流程，谢谢。")
+        jsPsych.endCurrentTimeline();
+    } 
+}
 //survey text 字数限制
 function word_length(ws) {
     var n = document.querySelector("#input-0").textLength;
