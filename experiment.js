@@ -169,7 +169,7 @@ var rank = {
                 break;
         }
         var ads = [];
-        var str = "<table id='rank'><thead><tr><th>名次(55/55)</th><th>姓名</th><th>学历</th><th>分数</th></tr></thead><tbody><tr><td>1</td><td>余庆华</td><td>硕士以上</td><td>55</td></tr><tr><td>1</td><td>施囡</td><td>硕士及硕士在读</td><td>55</td></tr><tr><td>3</td><td>王维俊</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>3</td><td>广姗然</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>5</td><td>王慧敏</td><td>本科及本科在读</td><td>53</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>40</td><td>王汉华</td><td>大专及大专在读</td><td>21</td></tr><tr><td>41</td><td>"+subName+"</td><td>"+xl+"</td><td>20</td></tr><tr><td>41</td><td>秋瑾兰</td><td>其他</td><td>20</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr></tbody></table>";
+        var str = "<p>历史得分排名</p><table id='rank'><thead><tr><th>名次(55/55)</th><th>姓名</th><th>学历</th><th>分数</th></tr></thead><tbody><tr><td>1</td><td>余庆华</td><td>硕士以上</td><td>55</td></tr><tr><td>1</td><td>施囡</td><td>硕士及硕士在读</td><td>55</td></tr><tr><td>3</td><td>王维俊</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>3</td><td>广姗然</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>5</td><td>王慧敏</td><td>本科及本科在读</td><td>53</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>40</td><td>王汉华</td><td>大专及大专在读</td><td>21</td></tr><tr><td>41</td><td>"+subName+"</td><td>"+xl+"</td><td>20</td></tr><tr><td>41</td><td>秋瑾兰</td><td>其他</td><td>20</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr></tbody></table>";
         ads[0]=str;
         return ads
     },
@@ -463,7 +463,7 @@ jsPsych.init({
         });/*
         jsPsych.data.get().localSave('csv', `ST_${subName}.csv`) // download from browser*/
         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
-        if(condition==1){
+        if(condition==0){
             document.getElementById('jspsych-content').innerHTML += '实验过程中图形推理的排名是我们杜撰，并非您的真实能力反应，请勿有任何消极情绪'
         }
     }
