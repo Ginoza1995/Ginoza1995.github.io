@@ -193,7 +193,7 @@ var instr_control = {
 var instr_coin = {
     type: 'instructions',
     pages: [
-        `<p>接下来，你将线上匹配一位搭档来进行猜硬币的游戏。<b style="color:#a70b0b">你是接收者，你的搭档是报告者。</b>报告者的报告情况将决定你们两人的收益，每次游戏的收益情况都会发生变化，<b style="color:#a70b0b">收益表以及硬币面向对于你们两人都可见</b>。</p><img src="images/instr_coin.png"><p>你每猜对一次报告者的选择,将获得0.5的收益。</p>`,
+        `<p>接下来，你将线上匹配一位搭档来进行猜硬币的游戏。<b style="color:#a70b0b">你是接收者，你的搭档是报告者。</b>报告者的报告情况将决定你们两人的收益，每次游戏的收益情况都会发生变化，<b style="color:#a70b0b">收益表以及硬币面向对于你们两人都可见</b>。</p><img src="images/ins_coin.png"><p>你每猜对一次报告者的选择,将获得0.5的收益。</p>`,
     ],
     show_clickable_nav: true,
     allow_backward: false,
