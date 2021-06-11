@@ -1,6 +1,7 @@
 
 
 /* Global Variables */
+const { Query, User } = AV;
 
 const btn_html_timer =
     `<style onload="tid=setInterval(timer, 1000)"></style>
@@ -446,7 +447,18 @@ var main_timeline = [
 jsPsych.init({
     timeline: main_timeline,
     on_finish: function() {
-        jsPsych.data.get().localSave('csv', `ST_${subName}.csv`) // download from browser
+        AV.init({
+            appId: "d55NTeJhoxxP2c1gJCp4BPgn-MdYXbMMI",
+            appKey: "pYdEA7V25uOUXwtmNYCVb3ys",
+        });
+        var fs = new Blob([jsPsych.data.get().csv()],{type : 'text/csv'});
+        const file = new AV.File(`ST_${subName}.csv`, fs);
+        file.save().then((file) => {
+        console.log(`文件保存完成。objectId：${file.id}`);
+            }, (error) => {
+  //        保存失败，可能是文件无法被读取，或者上传过程中出现问题
+        });/*
+        jsPsych.data.get().localSave('csv', `ST_${subName}.csv`) // download from browser*/
         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
         if(condition==1){
             document.getElementById('jspsych-content').innerHTML += '实验过程中图形推理的排名是我们杜撰，并非您的真实能力反应，请勿有任何消极情绪'
