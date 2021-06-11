@@ -165,7 +165,7 @@ var rank = {
                 break;
         }
         var ads = [];
-        var str = "<table id='rank'><thead><tr><th>名次(55/55)</th><th>姓名</th><th>学历</th><th>分数</th></tr></thead><tbody><tr><td>1</td><td>余庆华</td><td>硕士以上</td><td>55</td></tr><tr><td>1</td><td>施囡</td><td>硕士及硕士在读</td><td>55</td></tr><tr><td>3</td><td>王维俊</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>3</td><td>广姗然</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>5</td><td>王慧敏</td><td>本科及本科在读</td><td>53</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>40</td><td>王汉华</td><td>大专及大专在读</td><td>21</td></tr><tr><td>41</td><td>"+subName+"</td><td>"+xl+"</td><td>20</td></tr><tr><td>41</td><td>秋瑾兰</td><td>其他</td><td>20</td></tr></tbody></table>";
+        var str = "<table id='rank'><thead><tr><th>名次(55/55)</th><th>姓名</th><th>学历</th><th>分数</th></tr></thead><tbody><tr><td>1</td><td>余庆华</td><td>硕士以上</td><td>55</td></tr><tr><td>1</td><td>施囡</td><td>硕士及硕士在读</td><td>55</td></tr><tr><td>3</td><td>王维俊</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>3</td><td>广姗然</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>5</td><td>王慧敏</td><td>本科及本科在读</td><td>53</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>40</td><td>王汉华</td><td>大专及大专在读</td><td>21</td></tr><tr><td>41</td><td>"+subName+"</td><td>"+xl+"</td><td>20</td></tr><tr><td>41</td><td>秋瑾兰</td><td>其他</td><td>20</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr></tbody></table>";
         ads[0]=str;
         return ads
     },
@@ -259,20 +259,38 @@ var School = {
     on_finish: function(data) { data.value = data.response.Q0;xueli = data.value}
 }
 
+var instr_ssgs = {
+    type: 'instructions',
+    pages: [
+        `<p style="text-align: left">
+        指导语：<br/>
+        认真阅读之后的句子，<br/>
+        并选择符合你内心感受的按钮。<br/><br/>
+        1 = 完全没感觉<br/>
+        2 = 比较没感觉<br/>
+        3 = 有一点感觉<br/>
+        4 = 比较有感觉<br/>
+        5 = 感觉强烈<br/>`,
+    ],
+    show_clickable_nav: true,
+    allow_backward: false,
+    button_label_previous: '返回',
+    button_label_next: '继续'
+}
 
 var SSGS = {
     timeline: [{
         type: 'html-slider-response',
         data: jsPsych.timelineVariable('data'),
+        on_load: function() { setSliderAttr() },
         stimulus: jsPsych.timelineVariable('s'),
-        prompt: `
-        <p style="font-size: 16pt; font-weight: normal">
-        请基于你此时此刻的感受，表明你对下列陈述的同意程度<br/>
-        （1 = 非常不同意，7 = 非常同意）</p>`,
-        choices: ['1', '2', '3', '4', '5'],
-        //当你要记录likert量表的多个问题答案时，可以用addRespFromButtonScale(data,'你的量表名var空格后的名字')
-        on_finish: function(data) { addRespFromButtonScale(data, 'SSGS') },
-        post_trial_gap: 50
+        labels: ['完全没感觉', '比较没感觉', '有一点感觉', '比较有感觉', '感觉强烈'],
+        min: 1,   
+        max: 5,
+        slider_start: 3,
+        prompt: '<b id="slider-value">_</b><br/><br/>',
+        button_label: '继续',
+        require_movement: true,
     }],
     timeline_variables: [
         { data: { i: 1 }, s: '我好想找个地洞钻进去，从这里消失' },
@@ -282,7 +300,10 @@ var SSGS = {
         { data: { i: 5 }, s: '我觉得自己毫无价值，缺少力量' },
         { data: { i: 6 }, s: '我感到羞耻' }
     ],
-    randomize_order: false
+    randomize_order: false,
+    on_finish: function(data) { addRespFromButtonScale(data, 'SSGS') },
+    post_trial_gap: 100
+
 }
 
 var OpenEnded = {
@@ -298,21 +319,18 @@ var OpenEnded = {
     on_finish: function(data) { data.response = data.response.Q0;data.value = new Date().toLocaleTimeString() }
 }
 
-var test_st1 = [
+var test_st = [
     {img:"images/d11.png" },
     {img:"images/d12.png" },
     {img:"images/e10.png" },
     {img:"images/e12.png" },
     {img:"images/g15.png" },
-]
-
-var test_st2 = [
-    {img:"images/m12.png" },
-    {img:"images/m16.png" },
-    {img:"images/m18.png" },
-    {img:"images/m23.png" },
-    {img:"images/m35.png" },
-    {img:"images/m36.png" },
+    {img:"images/m12.jpg" },
+    {img:"images/m16.jpg" },
+    {img:"images/m18.jpg" },
+    {img:"images/m23.jpg" },
+    {img:"images/m35.jpg" },
+    {img:"images/m36.jpg" },
 ]
 
 var coinlist = [
@@ -351,12 +369,10 @@ var cointrust = {
         ],
     // trial presentation
     randomize_order: true,
-    repetitions: 2,
-
 }
 
-var shame_test1 = {
-    timeline_variables: test_st1,
+var shame_test = {
+    timeline_variables: test_st,
     timeline:[{
         type: 'html-button-response',
         stimulus:function(){
@@ -368,21 +384,6 @@ var shame_test1 = {
     }],
     trial_duration:30000,
     }
-
-
-var shame_test2 = {
-    timeline_variables: test_st2,
-    timeline:[{
-        type: 'html-button-response',
-        stimulus:function(){
-            var html = '<div id="timelimit" style="text-align:center;font-size:15px;margin-bottom:30px;"></div><img src="'+jsPsych.timelineVariable("img")+'"></img>';
-            return html;
-        },
-        choices:['A','B','C','D','E','F','G','H'],
-        prompt: '请选择最合适的图片',
-    }],
-    trial_duration:30000,
-}
 
 /* Combine Timelines */
 
@@ -396,7 +397,7 @@ var demographics = {
 if (condition==0){
     var test = {
     timeline: [
-        instr_as,shame_test1,shame_test2,rank,
+        instr_as,shame_test,rank,
         ],
     }
 } else if (condition==2){
@@ -415,12 +416,12 @@ if (condition==0){
 if(condition==0){
     var pre = {
     type: 'preload',
-    trials:[shame_test1,shame_test2,cointrust],
+    trials:[shame_test,instr_coin,cointrust],
     }
 } else {
     var pre = {
     type: 'preload',
-    trials:[cointrust],
+    trials:[instr_coin,cointrust],
     }
 }
 

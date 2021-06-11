@@ -123,7 +123,7 @@ jsPsych.plugins['html-slider-response'] = (function() {
       var offset = (percent_dist_from_center * half_thumb_width)/100;
       html += '<div style="border: 1px solid transparent; display: inline-block; position: absolute; '+
       'left:calc('+percent_of_range+'% - ('+label_width_perc+'% / 2) - '+offset+'px); text-align: center; width: '+label_width_perc+'%;">';  
-      html += '<span style="text-align: center; font-size: 80%;">'+trial.labels[j]+'</span>';
+      html += '<span style="text-align: center; font-size: 80%;" value="'+trial.labels[j]+'">'+(j+1)+'</span>';
       html += '</div>'
     }
     html += '</div>';

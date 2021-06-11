@@ -76,8 +76,8 @@ function setSliderAttr(event = 'onmouseup') {
 }
 
 function addSliderValue(element_id = 'slider-value') {
-    var sss = "aj" + (parseInt(document.getElementById('jspsych-html-slider-response-response').value)-1)
-    document.getElementById(element_id).innerHTML = document.getElementById(sss).getAttribute("ans")
+    var sss = (parseInt(document.getElementById('jspsych-html-slider-response-response').value)-1)
+    document.getElementById(element_id).innerHTML = document.getElementsByTagName('span')[sss].getAttribute('value')
     document.getElementById('jspsych-html-slider-response-next').disabled = false
 }
 
