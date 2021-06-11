@@ -434,7 +434,7 @@ var main_timeline = [
     warmup,
     demographics,
     test,instr_coin,
-    cointrust,
+    cointrust,instr_ssgs,
     SSGS,
     OpenEnded,
     close_fullscreen,
