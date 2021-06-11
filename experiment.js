@@ -209,7 +209,7 @@ var Sex = {
     data: { varname: 'Sex' },
     stimulus: '你的性别',
     choices: ['男', '女'],
-    on_finish: function(data) { addRespFromButton(data) }
+    on_finish: function(data) { data.value = addRespFromButton(data); }
 }
 
 var Age = {
@@ -230,7 +230,7 @@ var AName = {
     html: `<p><input name="Q0" type="text
     " required style="font-size: 20px;" placeholder="姓名"></p>`,
     button_label: '继续',
-    on_finish: function(data) {subName = data.response.Q0 ;}
+    on_finish: function(data) {data.value = data.response.Q0;subName = data.response.Q0 ;}
 }
 
 /*var Email = {
