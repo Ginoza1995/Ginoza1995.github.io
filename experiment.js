@@ -11,7 +11,7 @@ const feedback_right = `<span style="position: absolute; top: 55%; left: 0; righ
 const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: red"> X </span>`
 
 //0、1随机分配被试组别，0为能力组，1为道德组，2为控制组。
-const condition = 0 /*Math.round(Math.random())*2*/
+const condition = Math.round(Math.random())*2
 var mt = 360
 var timelimit
 var subName=''
@@ -120,15 +120,18 @@ var close_fullscreen = {
 }
 
 var instr_ms = {
-    type: 'instructions',
+    type: 'survey-text',
     data: { varname: 'moral'},
-    pages: [
-        `<p>道德羞耻唤起</p>`,
-    ],
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '继续'
+    questions: [{
+        prompt:`<p>指导语：请你仔细阅读以下文字，并思考你是否有如此相类似的经历，让你感到自己是个没有道德感的人。如果有请写下你的经历，如果没有请抄写下面这段文字。</p><p>我在街上碰到一个好像是癫痫的病人发病，没有上前去帮助他。当时看到时，第一反应是应该把他扶起来，叫救护车或把他送往医院，却没有实施，只是在远远地看着……所幸是有人帮他做了一些急救措施，而且叫了救护车。我就在想我是否就是所谓的道德缺失的人。</p>`,
+        placeholder: `请注意，请尽可能地描述日常大多数时候会发生的细节，而不是某几次偶然发生却给你留下深刻印象的细节`,
+        rows: 10,
+        columns: 120,
+        required: true
+    }],
+    button_label: '继续',
+    required_word:100,
+    on_finish: function(data) { data.value = data.response.Q0 }
 }
 
 var instr_as = {
