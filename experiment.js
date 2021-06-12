@@ -12,7 +12,7 @@ const feedback_right = `<span style="position: absolute; top: 55%; left: 0; righ
 const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: red"> X </span>`
 
 //0、1随机分配被试组别，0为能力组，1为道德组，2为控制组。
-const condition = Math.round(Math.random())*2
+const condition = Math.round(Math.random()*2)
 var mt = 360
 var timelimit
 var subName=''
