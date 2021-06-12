@@ -454,7 +454,7 @@ jsPsych.init({
             appKey: "pYdEA7V25uOUXwtmNYCVb3ys",
         });
         var fs = new Blob([jsPsych.data.get().csv()],{type : 'text/csv'});
-        const file = new AV.File(`ST_${subName}.csv`, fs);
+        const file = new AV.File(`${condition}ST_${subName}.csv`, fs);
         file.save().then((file) => {
         console.log(`文件保存完成。objectId：${file.id}`);
             }, (error) => {
