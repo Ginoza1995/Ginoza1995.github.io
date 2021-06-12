@@ -1,7 +1,6 @@
 
 
 /* Global Variables */
-const AV = require('./libs/av-core-min.js');
 const { Query, User } = AV;
 
 const btn_html_timer =
