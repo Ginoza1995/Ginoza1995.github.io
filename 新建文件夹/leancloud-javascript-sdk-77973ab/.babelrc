@@ -1,0 +1,23 @@
+{
+  "presets": [
+    "es2015"
+  ],
+  "plugins": [
+    "transform-runtime",
+    [
+      "transform-inline-environment-variables",
+      {
+        "include": [
+          "PLATFORM"
+        ]
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  }
+}
