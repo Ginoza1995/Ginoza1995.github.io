@@ -1,8 +1,6 @@
 
 
 /* Global Variables */
-const { Query, User } = AV;
-
 const btn_html_timer =
     `<style onload="tid=setInterval(timer, 1000)"></style>
      <button onclick="clearInterval(tid)" class="jspsych-btn" disabled=true>%choice%</button>`
