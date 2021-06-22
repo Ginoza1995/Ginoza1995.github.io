@@ -68,7 +68,7 @@ var open_fullscreen = {
     （2）关掉电脑上其他正在运行的程序或将其最小化<br/>
     （3）将手机调至静音，并尽可能减少环境噪音干扰<br/>
     （4）在测验过程中不要退出全屏或刷新页面<br/>
-    （5）务必认真作答<br/><br/>
+    （5）务必认真作答，实验中设置有注意检测题，错误回答者将不发放报酬<br/><br/>
     </b>
     如果你同意参与，并且清楚理解了上述要求，请点击开始：
     </p>`,
@@ -445,25 +445,16 @@ var main_timeline = [
 
 
 /* Launch jsPsych */
-
-jsPsych.init({
+jatos.onLoad(function() {
+    jsPsych.init({
     timeline: main_timeline,
     on_finish: function() {
-        AV.init({
-            appId: "d55NTeJhoxxP2c1gJCp4BPgn-MdYXbMMI",
-            appKey: "pYdEA7V25uOUXwtmNYCVb3ys",
-        });
-        var fs = new Blob([jsPsych.data.get().csv()],{type : 'text/csv'});
-        const file = new AV.File(`${condition}ST_${subName}.csv`, fs);
-        file.save().then((file) => {
-        console.log(`文件保存完成。objectId：${file.id}`);
-            }, (error) => {
-  //        保存失败，可能是文件无法被读取，或者上传过程中出现问题
-        });/*
-        jsPsych.data.get().localSave('csv', `ST_${subName}.csv`) // download from browser*/
+        var resultJson = jsPsych.data.get().json();
         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
         if(condition==0){
             document.getElementById('jspsych-content').innerHTML += '实验过程中图形推理的排名是我们杜撰，并非您的真实能力反应，请勿有任何消极情绪'
         }
+        jatos.submitResultData(resultJson, jatos.startNextComponent);
     }
-})
+});
+});
