@@ -1,6 +1,7 @@
 
 
 /* Global Variables */
+const { Query, User } = AV;
 
 const btn_html_timer =
     `<style onload="tid=setInterval(timer, 1000)"></style>
@@ -11,8 +12,7 @@ const feedback_right = `<span style="position: absolute; top: 55%; left: 0; righ
 const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: red"> X </span>`
 
 //0、1随机分配被试组别，0为能力组，1为道德组，2为控制组。
-const condition = 0 /*Math.round(Math.random()*2)*/
-
+const condition = Math.round(Math.random()*2)
 var mt = 360
 var timelimit
 var subName=''
@@ -124,14 +124,14 @@ var instr_ms = {
     type: 'survey-text',
     data: { varname: 'moral'},
     questions: [{
-        prompt:`<p>指导语：请你仔细阅读以下文字，并思考你是否有如此相类似的经历，让你感到自己是个没有道德感的人。如果有请写下你的经历，如果没有请抄写下面这段文字。</p><p>我在街上碰到一个好像是癫痫的病人发病，没有上前去帮助他。当时看到时，第一反应是应该把他扶起来，叫救护车或把他送往医院，却没有实施，只是在远远地看着……所幸是有人帮他做了一些急救措施，而且叫了救护车。我就在想我是否就是所谓的道德缺失的人。</p>`,
-        placeholder: `请注意，请尽可能地描述日常大多数时候会发生的细节，而不是某几次偶然发生却给你留下深刻印象的细节`,
+        prompt:`<p>指导语：请你仔细阅读以下文字，并回想一个相类似的经历，让你感到自己是个没有道德感的人，请尽量生动具体地在脑海里想象这个场景，当你能成功地回忆这段经历时，请在下方写下这段经历。请至少填写150字。</p><p>我在街上碰到一个好像是癫痫的病人发病，没有上前去帮助他。当时看到时，第一反应是应该把他扶起来，叫救护车或把他送往医院，却没有实施，只是在远远地看着……所幸是有人帮他做了一些急救措施，而且叫了救护车。我就在想我是否就是所谓的道德缺失的人。</p>`,
+        placeholder: `请尽量描述每一个细节，你不需要写成一段连贯的文字，任何与之相关的细节都可以被记录下来.`,
         rows: 10,
         columns: 120,
         required: true
     }],
     button_label: '继续',
-    required_word:100,
+    required_word:150,
     on_finish: function(data) { data.value = data.response.Q0 }
 }
 
@@ -139,7 +139,7 @@ var instr_as = {
     type: 'instructions',
     data: { varname: 'ability'},
     pages: [
-        `<p>接下来要做的是一个数图推理测验，它能较好地反应一个人的逻辑推理能力。每道题中的各个选项的得分有所不同，最低0分，最高5分。请看下面的例题：</p><img src="images/例.png"><p>在这张图中，上面的图像是缺了一部分的，图案下面的小图片的形状都与上图所缺部分一样，但内容不同，不是每一张小图片都能补全上面的图案。请看第一张小图片，显然不行，第二、三张也对不上，第六张好像可以，但也有一小块空白。最后只有第四张是最合适的，所以，4将获得最高得分。</p><p><b style="color:#a70b0b">每题限时30秒，共11题，请尽力作答</b></p>`,
+        `<p>接下来要做的是一个数图推理测验，它能较好地反应一个人的逻辑推理能力。每道题中的各个选项的得分有所不同，最低0分，最高5分。请看下面的例题：</p><img src="images/例.png"><p>在这张图中，上面的图像是缺了一部分的，图案下面的小图片的形状都与上图所缺部分一样，但内容不同，不是每一张小图片都能补全上面的图案。请看第一张小图片，显然不行，第二、三张也对不上，第六张好像可以，但也有一小块空白。最后只有第四张是最合适的，所以，4将获得最高得分。</p><p><b style="color:#a70b0b">每题限时30秒，共11题，请尽力作答。你的成绩将被上传，所有参与本实验的人都将看到。</b></p>`,
     ],
     show_clickable_nav: true,
     allow_backward: false,
@@ -169,7 +169,7 @@ var rank = {
                 break;
         }
         var ads = [];
-        var str = "<p>历史得分排名</p><table id='rank'><thead style='text-align:center;'><tr><th>名次(55/55)</th><th>姓名</th><th style='width:200px;'>学历</th><th style='width:100px;'>分数</th></tr></thead><tbody><tr><td>1</td><td>余庆华</td><td>硕士以上</td><td>55</td></tr><tr><td>1</td><td>施囡</td><td>硕士及硕士在读</td><td>55</td></tr><tr><td>3</td><td>王维俊</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>3</td><td>广姗然</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>5</td><td>王慧敏</td><td>本科及本科在读</td><td>53</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>40</td><td>王汉华</td><td>大专及大专在读</td><td>21</td></tr><tr style='background-color:#ffff66;'><td>41</td><td>"+subName+"</td><td>"+xl+"</td><td>20</td></tr><tr><td>41</td><td>秋瑾兰</td><td>其他</td><td>20</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr></tbody></table>";
+        var str = "<p>历史得分排名</p><table id='rank'><thead style='text-align:center;'><tr><th>名次(55/55)</th><th>姓名</th><th style='width:200px;'>学历</th><th style='width:100px;'>分数</th></tr></thead><tbody><tr><td>1</td><td>余庆华</td><td>硕士以上</td><td>55</td></tr><tr><td>1</td><td>施囡</td><td>硕士及硕士在读</td><td>55</td></tr><tr><td>3</td><td>王维俊</td><td>本科及本科在读</td><td>54</td></tr><tr><td>3</td><td>广姗然</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>5</td><td>王慧敏</td><td>本科及本科在读</td><td>53</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>40</td><td>王汉华</td><td>大专及大专在读</td><td>21</td></tr><tr style='background-color:#ffff66;'><td>41</td><td>"+subName+"</td><td>"+xl+"</td><td>20</td></tr><tr><td>41</td><td>秋瑾兰</td><td>其他</td><td>20</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr></tbody></table>";
         ads[0]=str;
         return ads
     },
@@ -213,7 +213,7 @@ var Sex = {
     data: { varname: 'Sex' },
     stimulus: '你的性别',
     choices: ['男', '女'],
-    on_finish: function(data) { data.value = addRespFromButton(data); }
+    on_finish: function(data) { data.value = addRespFromButton(data) }
 }
 
 var Age = {
@@ -432,8 +432,7 @@ if(condition==0){
 
 var main_timeline = [
     set_html_style,
-    open_fullscreen,
-    pre,
+    open_fullscreen,pre,
     welcome,
     warmup,
     demographics,
@@ -450,9 +449,20 @@ var main_timeline = [
 jsPsych.init({
     timeline: main_timeline,
     on_finish: function() {
-        jsPsych.data.get().localSave('csv', `ST_${subName}.csv`) // download from browser
+        AV.init({
+            appId: "d55NTeJhoxxP2c1gJCp4BPgn-MdYXbMMI",
+            appKey: "pYdEA7V25uOUXwtmNYCVb3ys",
+        });
+        var fs = new Blob([jsPsych.data.get().csv()],{type : 'text/csv'});
+        const file = new AV.File(`${condition}ST_${subName}.csv`, fs);
+        file.save().then((file) => {
+        console.log(`文件保存完成。objectId：${file.id}`);
+            }, (error) => {
+  //        保存失败，可能是文件无法被读取，或者上传过程中出现问题
+        });/*
+        jsPsych.data.get().localSave('csv', `ST_${subName}.csv`) // download from browser*/
         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
-        if(condition==1){
+        if(condition==0){
             document.getElementById('jspsych-content').innerHTML += '实验过程中图形推理的排名是我们杜撰，并非您的真实能力反应，请勿有任何消极情绪'
         }
     }
