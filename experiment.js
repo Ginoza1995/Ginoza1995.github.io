@@ -9,12 +9,8 @@ const feedback_right = `<span style="position: absolute; top: 55%; left: 0; righ
 
 const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: red"> X </span>`
 
-//0、1随机分配被试组别，0为能力组，1为道德组，2为控制组。
-const condition = Math.round(Math.random()*2)
-var mt = 360
-var timelimit
-var subName=''
-var xueli=''
+//0、1随机分配被试组别，0为两两比较，1为单独比较
+const condition = Math.round(Math.random())
 /* Blocks: HTML DOM Settings */
 
 var set_html_style = {
@@ -54,7 +50,7 @@ var set_html_style_EAST = {
 
 /* Blocks: Basics */
 
-var open_fullscreen = {
+/*var open_fullscreen = {
     type: 'fullscreen',
     fullscreen_mode: true,
     message: `
@@ -72,22 +68,21 @@ var open_fullscreen = {
     </p>`,
     button_label: '点击这里全屏开始',
     delay_after: 100
-}
+}*/
 
 var welcome = {
     type: 'instructions',
-    data: { value: new Date().toLocaleTimeString() },
     pages: [ `
-    <p style="font: bold 32pt 微软雅黑; color: #B22222">
-    欢迎参与我们的实验</p>
-    <p style="font: 20pt 微软雅黑; color: black"><br/>
-    <b>实验过程中请勿退出全屏</b><br/><br/></p>
+    <p style="font:32pt 微软雅黑; color: #B22222">
+    假设你现在是一个小型发展中国家的政府官员，现在你需要对四项提案进行评定。两项提案分别涉及到国民就业问题、国家交通运输问题，另两项提案是对巴基斯坦的人道援助。<br>
+    这四项提案的预计投入金额相近。</p>
+    
     <p style="font: 20pt 华文中宋; color: grey">
-    江西师范大学<br/>2021年</p>`],
+    接下来，你将对这四项提案进行评判。</p>`],
     show_clickable_nav: true,
     allow_backward: false,
     button_label_previous: '返回',
-    button_label_next: '继续'
+    button_label_next: '开始'
 }
 
 /*var welcome = {
@@ -112,12 +107,12 @@ var warmup = {
     button_html: btn_html_timer
 }
 
-var close_fullscreen = {
+/*var close_fullscreen = {
     type: 'fullscreen',
     fullscreen_mode: false,
     delay_after: 0
 }
-
+*/
 var instr_ms = {
     type: 'survey-text',
     data: { varname: 'moral'},
