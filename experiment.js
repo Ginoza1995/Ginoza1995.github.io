@@ -50,7 +50,7 @@ var set_html_style_EAST = {
 
 /* Blocks: Basics */
 
-/*var open_fullscreen = {
+var open_fullscreen = {
     type: 'fullscreen',
     fullscreen_mode: true,
     message: `
@@ -68,7 +68,7 @@ var set_html_style_EAST = {
     </p>`,
     button_label: '点击这里全屏开始',
     delay_after: 100
-}*/
+}
 
 var welcome = {
     type: 'instructions',
@@ -107,12 +107,12 @@ var warmup = {
     button_html: btn_html_timer
 }
 
-/*var close_fullscreen = {
+var close_fullscreen = {
     type: 'fullscreen',
     fullscreen_mode: false,
     delay_after: 0
 }
-*/
+
 var instr_ms = {
     type: 'survey-text',
     data: { varname: 'moral'},
@@ -425,7 +425,7 @@ if(condition==0){
 
 var main_timeline = [
     set_html_style,
-    open_fullscreen,pre,
+    open_fullscreen,
     welcome,
     warmup,
     demographics,
@@ -447,7 +447,7 @@ jatos.onLoad(function() {
         if(condition==0){
             document.getElementById('jspsych-content').innerHTML += '实验过程中图形推理的排名是我们杜撰，并非您的真实能力反应，请勿有任何消极情绪'
         }
-        jatos.submitResultData(resultJson, jatos.startNextComponent);
+        // jatos.submitResultData(resultJson, jatos.startNextComponent);
     }
 });
 });
