@@ -55,136 +55,16 @@ var open_fullscreen = {
     fullscreen_mode: true,
     message: `
     <p style="font: 16pt 微软雅黑; text-align: left; line-height: 1.6em">
-    <b>
-    测验将在一个「全屏页面」开始，为确保最佳效果，请你：<br/>
-    （1）在电脑上进行测验，并使用主流浏览器打开本网页<br/>
-    &emsp;&emsp;（Chrome、Edge、Firefox、Safari等，不要用IE）<br/>
-    （2）关掉电脑上其他正在运行的程序或将其最小化<br/>
-    （3）将手机调至静音，并尽可能减少环境噪音干扰<br/>
-    （4）在测验过程中不要退出全屏或刷新页面<br/>
-    （5）务必认真作答，实验中设置有注意检测题，错误回答者将不发放报酬<br/><br/>
-    </b>
-    如果你同意参与，并且清楚理解了上述要求，请点击开始：
+    接下来你将与你的游戏搭档进行掷硬币的游戏。
     </p>`,
     button_label: '点击这里全屏开始',
     delay_after: 100
-}
-
-var welcome = {
-    type: 'instructions',
-    pages: [ `
-    <p style="font:32pt 微软雅黑; color: #B22222">
-    假设你现在是一个小型发展中国家的政府官员，现在你需要对四项提案进行评定。两项提案分别涉及到国民就业问题、国家交通运输问题，另两项提案是对巴基斯坦的人道援助。<br>
-    这四项提案的预计投入金额相近。</p>
-    
-    <p style="font: 20pt 华文中宋; color: grey">
-    接下来，你将对这四项提案进行评判。</p>`],
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '开始'
-}
-
-/*var welcome = {
-    type: 'html-keyboard-response',
-    stimulus: `
-    <p style="font: bold 32pt 微软雅黑; color: #B22222">
-    欢迎参与我们的实验</p>
-    <p style="font: 20pt 微软雅黑; color: black"><br/>
-    <按空格键继续><br/>
-    <b>实验过程中请勿退出全屏</b><br/><br/></p>
-    <p style="font: 20pt 华文中宋; color: grey">
-    江西师范大学<br/>2021年</p>`,
-    choices: [' ',],
-    //post_trial_gap: n   下个页面呈现前将有持续n毫秒的空白页
-    post_trial_gap: 100
-}*/
-
-var warmup = {
-    type: 'html-button-response',
-    stimulus: `<p>在每一部分的问题前都有详细的指导语，请务必仔细阅读指导语后再进行作答。每个人的行为或想法都不一样，所以问题的答案没有好与坏之分，您只需要按照内心的直觉作答即可。如果不是理解错误导致的错选，您无需反复修改您的答案。</p><p>您的回答不会被用于除研究以外的其他用途或透露给与研究无关的人员，本研究也不会记录任何事后能将您与本问卷回答进行联系或追溯的个人信息，请放心作答。</p>`,
-    choices: ['<span id="timer">10</span>秒后继续'],
-    button_html: btn_html_timer
 }
 
 var close_fullscreen = {
     type: 'fullscreen',
     fullscreen_mode: false,
     delay_after: 0
-}
-
-var instr_ms = {
-    type: 'survey-text',
-    data: { varname: 'moral'},
-    questions: [{
-        prompt:`<p>指导语：请你仔细阅读以下文字，并回想一个相类似的经历，让你感到自己是个没有道德感的人，请尽量生动具体地在脑海里想象这个场景，当你能成功地回忆这段经历时，请在下方写下这段经历。请至少填写150字。</p><p>我在街上碰到一个好像是癫痫的病人发病，没有上前去帮助他。当时看到时，第一反应是应该把他扶起来，叫救护车或把他送往医院，却没有实施，只是在远远地看着……所幸是有人帮他做了一些急救措施，而且叫了救护车。我就在想我是否就是所谓的道德缺失的人。</p>`,
-        placeholder: `请尽量描述每一个细节，你不需要写成一段连贯的文字，任何与之相关的细节都可以被记录下来.`,
-        rows: 10,
-        columns: 120,
-        required: true
-    }],
-    button_label: '继续',
-    required_word:150,
-    on_finish: function(data) { data.value = data.response.Q0 }
-}
-
-var instr_as = {
-    type: 'instructions',
-    data: { varname: 'ability'},
-    pages: [
-        `<p>接下来要做的是一个数图推理测验，它能较好地反应一个人的逻辑推理能力。每道题中的各个选项的得分有所不同，最低0分，最高5分。请看下面的例题：</p><img src="images/例.png"><p>在这张图中，上面的图像是缺了一部分的，图案下面的小图片的形状都与上图所缺部分一样，但内容不同，不是每一张小图片都能补全上面的图案。请看第一张小图片，显然不行，第二、三张也对不上，第六张好像可以，但也有一小块空白。最后只有第四张是最合适的，所以，4将获得最高得分。</p><p><b style="color:#a70b0b">每题限时30秒，共11题，请尽力作答。你的成绩将被上传，所有参与本实验的人都将看到。</b></p>`,
-    ],
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '继续',
-}
-
-var rank = {
-    type: 'instructions',
-    pages: function(){
-        var xl=''
-        switch(xueli){
-            case "1" :
-                xl = "其它";
-                break;
-            case "2":
-                xl = "大专及大专在读";
-                break;
-            case "3":
-                xl = "本科及本科在读";
-                break;
-            case "4":
-                xl = "硕士及硕士在读";
-                break;
-            case "5":
-                xl = "硕士以上";
-                break;
-        }
-        var ads = [];
-        var str = "<p>历史得分排名</p><table id='rank'><thead style='text-align:center;'><tr><th>名次(55/55)</th><th>姓名</th><th style='width:200px;'>学历</th><th style='width:100px;'>分数</th></tr></thead><tbody><tr><td>1</td><td>余庆华</td><td>硕士以上</td><td>55</td></tr><tr><td>1</td><td>施囡</td><td>硕士及硕士在读</td><td>55</td></tr><tr><td>3</td><td>王维俊</td><td>本科及本科在读</td><td>54</td></tr><tr><td>3</td><td>广姗然</td><td>硕士及硕士在读</td><td>54</td></tr><tr><td>5</td><td>王慧敏</td><td>本科及本科在读</td><td>53</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>40</td><td>王汉华</td><td>大专及大专在读</td><td>21</td></tr><tr style='background-color:#ffff66;'><td>41</td><td>"+subName+"</td><td>"+xl+"</td><td>20</td></tr><tr><td>41</td><td>秋瑾兰</td><td>其他</td><td>20</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr><tr><td>.</td><td>.</td><td>.</td><td>.</td></tr></tbody></table>";
-        ads[0]=str;
-        return ads
-    },
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '继续',
-}
-
-var instr_control = {
-    type: 'survey-text',
-    data: { varname: 'control'},
-    questions: [{
-        prompt: `指导语：</br>请回忆以下这个校园生活中常遇到的场景：你打算在食堂吃饭，在点餐后找到了位置，就坐吃饭。请尽量生动具体地在脑海里想象这个过程，当你能成功地回忆这段经历时，请在下方写下这段经历。请尽量描述每一个细节，你不需要写成一段连贯的文字，也无需描述自己的心情，任何与之相关的细节都可以被记录下来，例如，人流量怎么样、你是如何挑选食物、座位的，等等。<b style="color:#a70b0b">请至少填写150字</b>`,
-        placeholder: `请注意，请尽可能地描述日常大多数时候会发生的细节，而不是某几次偶然发生却给你留下深刻印象的细节`,
-        rows: 10,
-        columns: 120,
-        required: true
-    }],
-    button_label: '继续',
-    required_word:150,
-    on_finish: function(data) { data.value = data.response.Q0 }
 }
 
 var instr_coin = {
@@ -201,35 +81,6 @@ var instr_coin = {
 
 /* Blocks: Surveys */
 
-var Sex = {
-    type: 'html-button-response',
-    data: { varname: 'Sex' },
-    stimulus: '你的性别',
-    choices: ['男', '女'],
-    on_finish: function(data) { data.value = addRespFromButton(data) }
-}
-
-var Age = {
-    type: 'survey-html-form',
-    data: { varname: 'Age' },
-    preamble: '你的年龄',
-    html: `
-    <p><input name="Q0" type="number" placeholder="15~99" min=15 max=99
-    oninput="if(value.length>2) value=value.slice(0,2)" required style="font-size:20px" /></p>`,
-    button_label: '继续',
-    on_finish: function(data) { data.value = data.response.Q0 }
-}
-
-var AName = {
-    type: 'survey-html-form',
-    data: { varname: 'Name' },
-    preamble: '你的姓名',
-    html: `<p><input name="Q0" type="text
-    " required style="font-size: 20px;" placeholder="姓名"></p>`,
-    button_label: '继续',
-    on_finish: function(data) {data.value = data.response.Q0;subName = data.response.Q0 ;}
-}
-
 /*var Email = {
     type: 'survey-html-form',
     data: { varname: 'Email' },
@@ -240,68 +91,6 @@ var AName = {
     on_finish: function(data) { addRespFromSurvey(data) }
 }*/
 
-var School = {
-    type: 'survey-html-form',
-    data: { varname: 'School' },
-    preamble: '你的最高学历',
-    html: `
-    <p><select name="Q0" size=10 style="font-size:20px;">
-    <option value="2">大专及大专在读</option>
-    <option value="3">本科及本科在读</option>
-    <option value="4">硕士及硕士在读</option>
-    <option value="5">硕士以上</option>
-    <option value="1">其他</option>
-    </select></p>`,
-    button_label: '继续',
-    on_finish: function(data) { data.value = data.response.Q0;xueli = data.value}
-}
-
-var instr_ssgs = {
-    type: 'instructions',
-    pages: [
-        `<p style="text-align: left">
-        指导语：<br/>
-        认真阅读之后的句子，<br/>
-        并选择符合你内心感受的按钮。<br/><br/>
-        1 = 完全没感觉<br/>
-        2 = 比较没感觉<br/>
-        3 = 有一点感觉<br/>
-        4 = 比较有感觉<br/>
-        5 = 感觉强烈<br/>`,
-    ],
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '继续'
-}
-
-var SSGS = {
-    timeline: [{
-        type: 'html-slider-response',
-        data: jsPsych.timelineVariable('data'),
-        on_load: function() { setSliderAttr() },
-        stimulus: jsPsych.timelineVariable('s'),
-        labels: ['完全没感觉', '比较没感觉', '有一点感觉', '比较有感觉', '感觉强烈'],
-        min: 1,   
-        max: 5,
-        slider_start: 3,
-        prompt: '<b id="slider-value">_</b><br/><br/>',
-        button_label: '继续',
-        require_movement: true,
-    }],
-    timeline_variables: [
-        { data: { i: 1 }, s: '我好想找个地洞钻进去，从这里消失' },
-        { data: { i: 2 }, s: '我觉得自己很渺小' },
-        { data: { i: 3 }, s: '我感觉自己是个糟糕的人' },
-        { data: { i: 4 }, s: '我感到难堪、丢脸' },
-        { data: { i: 5 }, s: '我觉得自己毫无价值，缺少力量' },
-        { data: { i: 6 }, s: '我感到羞耻' }
-    ],
-    randomize_order: false,
-    on_finish: function(data) { addRespFromButtonScale(data, 'SSGS') },
-    post_trial_gap: 100
-
-}
 
 var OpenEnded = {
     type: 'survey-text',
@@ -384,56 +173,14 @@ var shame_test = {
 
 /* Combine Timelines */
 
-var demographics = {
-    timeline: [
-        AName, Sex, Age,  School, 
-    ]
-}
-
-
-if (condition==0){
-    var test = {
-    timeline: [
-        instr_as,shame_test,rank,
-        ],
-    }
-} else if (condition==2){
-    var test = {
-    timeline: [
-        instr_control,
-        ],}
-} else if (condition==1){
-    var test = {
-    timeline: [
-        instr_ms,
-        ],
-    }
-}
-
-if(condition==0){
-    var pre = {
-    type: 'preload',
-    trials:[shame_test,instr_coin,cointrust],
-    }
-} else {
-    var pre = {
-    type: 'preload',
-    trials:[instr_coin,cointrust],
-    }
-}
 
 
 var main_timeline = [
     set_html_style,
     open_fullscreen,
-    // welcome,
     warmup,
-    // demographics,
-    // test,
     instr_coin,
     cointrust,
-    // instr_ssgs,
-    // SSGS,
     OpenEnded,
     close_fullscreen,
 ]
