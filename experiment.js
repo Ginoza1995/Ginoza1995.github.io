@@ -426,9 +426,9 @@ if(condition==0){
 var main_timeline = [
     set_html_style,
     open_fullscreen,
-    welcome,
+    // welcome,
     warmup,
-    demographics,
+    // demographics,
     // test,
     instr_coin,
     cointrust,
@@ -440,8 +440,22 @@ var main_timeline = [
 
 
 /* Launch jsPsych */
-jatos.onLoad(function() {
-    jsPsych.init({
+// jatos.onLoad(function() {
+//     jsPsych.init({
+//     timeline: main_timeline,
+//     on_finish: function() {
+//         var resultJson = jsPsych.data.get().json();
+//         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
+//         if(condition==0){
+//             document.getElementById('jspsych-content').innerHTML += '实验过程中图形推理的排名是我们杜撰，并非您的真实能力反应，请勿有任何消极情绪'
+//         }
+//         // jatos.submitResultData(resultJson, jatos.startNextComponent);
+//     }
+// });
+// });
+
+
+jsPsych.init({
     timeline: main_timeline,
     on_finish: function() {
         var resultJson = jsPsych.data.get().json();
@@ -451,5 +465,4 @@ jatos.onLoad(function() {
         }
         // jatos.submitResultData(resultJson, jatos.startNextComponent);
     }
-});
 });
