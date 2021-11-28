@@ -1,4 +1,4 @@
-
+// 这是善直冲突实验范式，丢硬币
 
 /* Global Variables */
 const btn_html_timer =
