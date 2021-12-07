@@ -178,7 +178,6 @@ var shame_test = {
 var main_timeline = [
     set_html_style,
     open_fullscreen,
-    warmup,
     instr_coin,
     cointrust,
     OpenEnded,
