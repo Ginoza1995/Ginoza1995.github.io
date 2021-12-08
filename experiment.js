@@ -70,7 +70,7 @@ var close_fullscreen = {
 var instr_coin = {
     type: 'instructions',
     pages: [
-        `<p>接下来，你将线上匹配一位搭档来进行猜硬币的游戏。<b style="color:#a70b0b">你是接收者，你的搭档是报告者。</b>报告者的报告情况将决定你们两人的收益，每次游戏的收益情况都会发生变化，<b style="color:#a70b0b">收益表以及硬币面向对于你们两人都可见</b>。</p><img src="images/ins_coin.png"><p>你每猜对一次报告者的选择,将获得0.5的收益。</p>`,
+        `<p>接下来，你将与搭档来进行猜硬币的游戏。<b style="color:#a70b0b">由你来掷硬币，你的搭档向系统报告。</b>当你每次掷硬币后，如实向搭档发送面向信息，之后会出现收益表，最后搭档向系统报告硬币面向。<b style="color:#a70b0b">结合收益表和系统收到的报告情况决定你们俩人的收益</b>。</p><img src="images/ins_coin.png"><p>你每猜对一次搭档的选择,将获得0.5的收益。</p>`,
     ],
     show_clickable_nav: true,
     allow_backward: false,
@@ -145,7 +145,7 @@ var cointrust = {
             type: 'html-button-response',
             data: jsPsych.timelineVariable('data'),
             stimulus: function() {
-                var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>报告者（搭档）</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>接收者（你）</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><div id="euro" class="trans'+jsPsych.timelineVariable('face')+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
+                var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>搭档</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>你</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><div id="euro" class="trans'+jsPsych.timelineVariable('face')+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
                 return html;
             },
             prompt: '实际掷出情况如上图，你认为你的搭档将会报告哪一面',
