@@ -64,6 +64,18 @@ var instr_coin = {
     button_label_next: '继续'
 }
 
+var wait = {
+    type: 'instructions',
+    pages: [
+        `<p>接下来，你将与搭档来进行猜硬币的游戏。<b style="color:#a70b0b">由你来掷硬币，并如实输入系统。</b>之后将出现收益表，<b style="color:#a70b0b">你的搭档也会看到</b>。你与搭档的收益将由你的搭档最后向系统报告的所决定。`,
+    ],
+    show_clickable_nav: false,
+    allow_backward: false,
+    trial_duration:function () {
+        return jsPsych.randomization.sampleWithoutReplacement([800, 900, 1000, 1100], 1)[0];
+      },
+}
+
 var instr_exp = {
     type: 'instructions',
     pages: [
