@@ -56,7 +56,7 @@ var close_fullscreen = {
 var instr_coin = {
     type: 'instructions',
     pages: [
-        `<p>接下来，你将与搭档来进行猜硬币的游戏。<b style="color:#a70b0b">由你来掷硬币，并如实向搭档报告。</b>之后将出现收益表，<b style="color:#a70b0b">你的搭档也会看到</b>。你与搭档的收益将由你的搭档最后向系统报告的所决定。</p><img src="images/ins_coin.png"><p>你每猜对一次搭档的选择,将获得0.5的收益。</p>`,
+        `<p>接下来，你将与搭档来进行猜硬币的游戏。<b style="color:#a70b0b">由你来掷硬币，并如实输入系统。</b>之后将出现收益表，<b style="color:#a70b0b">你的搭档也会看到</b>。你与搭档的收益将由你的搭档最后向系统报告的所决定。`,
     ],
     show_clickable_nav: true,
     allow_backward: false,
@@ -67,7 +67,7 @@ var instr_coin = {
 var instr_exp = {
     type: 'instructions',
     pages: [
-        `<img src="images/ins_coin.png"><p>如在上图这种情况下，如果你的搭档报告“国徽面”，则你获得3积分，搭档获得2积分。<br>你每猜对一次搭档的报告情况，将额外获得0.5积分，积分最后将与报酬挂钩。</p>`,
+        `<img src="images/ins_coin.png"><p>如在上图这种情况下，你实际掷出的是国徽面。如果你的搭档报告“数字面”，则他获得3积分，你获得2积分。<br>你每猜对一次搭档的报告情况，将额外获得0.5积分，积分最后将与报酬挂钩。</p>`,
     ],
     show_clickable_nav: true,
     allow_backward: false,
@@ -81,7 +81,7 @@ var instr_exp = {
 var rep_coin = {
     type: 'html-button-response',
     choices:['国徽面','数字面'],
-    prompt: '请选择你掷出的硬币面向',
+    stimulus: '请选择你掷出的硬币面向',
 
     }
 
@@ -124,19 +124,20 @@ var coinlist = [
     { data: { varname: "s",face: 0 }, s0:2, s1:2, r0:-1, r1:2, face: 0 },
     { data: { varname: "s",face: 1 }, s0:1.5, s1:1.5, r0:1, r1:0, face: 1 },
     { data: { varname: "s",face: 0 }, s0:1, s1:1, r0:0, r1:1,face: 0 },
-    { data: { varname: "sp",face: 1 }, s0:1, s1:1, r0:0, r1:1,face: 1 },
-    { data: { varname: "sp",face: 0 }, s0:0.5, s1:0.5, r0:2, r1:1,face: 0 },
+    { data: { varname: "p",face: 1 }, s0:1, s1:1, r0:0, r1:1,face: 1 },
+    { data: { varname: "p",face: 0 }, s0:0.5, s1:0.5, r0:2, r1:1,face: 0 },
+    { data: { varname: "a",face: 0 }, s0:0.5, s1:0, r0:0.5, r1:0,face: 0 },    
 ]
 //硬币
 var cointrust = {
     timeline_variables: coinlist,
-    timeline: [{
+    timeline: [rep_coin,{
             type: 'html-button-response',
             data: jsPsych.timelineVariable('data'),
             stimulus: function() {
                 var rp = jsPsych.data.get().last(1).values()[0].response;
                 var fc = "国徽面"
-                if (rp==0) {fc = "数字面"}
+                if (rp==1) {fc = "数字面"}
                 if (rp==jsPsych.timelineVariable('face')) {
                     var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>搭档</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>你</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><p>你掷出了'+fc+'</p>';
                 }else{
