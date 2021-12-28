@@ -10,7 +10,7 @@ const feedback_right = `<span style="position: absolute; top: 55%; left: 0; righ
 const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: red"> X </span>`
 
 //0、1随机分配被试组别，0为两两比较，1为单独比较
-const condition = Math.round(Math.random())
+// const condition = Math.round(Math.random())
 /* Blocks: HTML DOM Settings */
 
 var set_html_style = {
@@ -34,20 +34,6 @@ var set_html_style = {
     },
 }
 
-var set_html_style_EAST = {
-    type: 'call-function',
-    func: function() {
-        document.body.style.backgroundColor = 'black'
-        document.body.style.color = 'white'
-        document.body.style.fontSize = '32pt'
-        document.body.style.fontFamily = '微软雅黑'
-        document.body.style.fontWeight = 'normal'
-        document.body.style.lineHeight = '1.2em'
-        document.body.style.cursor = 'none'
-    },
-}
-
-
 /* Blocks: Basics */
 
 var open_fullscreen = {
@@ -70,7 +56,18 @@ var close_fullscreen = {
 var instr_coin = {
     type: 'instructions',
     pages: [
-        `<p>接下来，你将与搭档来进行猜硬币的游戏。<b style="color:#a70b0b">由你来掷硬币，你的搭档向系统报告。</b>当你每次掷硬币后，如实向搭档发送面向信息，之后会出现收益表，最后搭档向系统报告硬币面向。<b style="color:#a70b0b">结合收益表和系统收到的报告情况决定你们俩人的收益</b>。</p><img src="images/ins_coin.png"><p>你每猜对一次搭档的选择,将获得0.5的收益。</p>`,
+        `<p>接下来，你将与搭档来进行猜硬币的游戏。<b style="color:#a70b0b">由你来掷硬币，并如实向搭档报告。</b>之后将出现收益表，<b style="color:#a70b0b">你的搭档也会看到</b>。你与搭档的收益将由你的搭档最后向系统报告的所决定。</p><img src="images/ins_coin.png"><p>你每猜对一次搭档的选择,将获得0.5的收益。</p>`,
+    ],
+    show_clickable_nav: true,
+    allow_backward: false,
+    button_label_previous: '返回',
+    button_label_next: '继续'
+}
+
+var instr_exp = {
+    type: 'instructions',
+    pages: [
+        `<img src="images/ins_coin.png"><p>如在上图这种情况下，如果你的搭档报告“国徽面”，则你获得3积分，搭档获得2积分。<br>你每猜对一次搭档的报告情况，将额外获得0.5积分，积分最后将与报酬挂钩。</p>`,
     ],
     show_clickable_nav: true,
     allow_backward: false,
@@ -80,17 +77,6 @@ var instr_coin = {
 
 
 /* Blocks: Surveys */
-
-/*var Email = {
-    type: 'survey-html-form',
-    data: { varname: 'Email' },
-    preamble: '你的邮箱',
-    html: '<p><input name="Q0" type="email" placeholder="非必填" /></p>',
-    button_label: '继续',
-    //此处需要注意name="Q0",下面这个语段是记录被试的回答，且只记录单个答案，且通过name="Q0"定位
-    on_finish: function(data) { addRespFromSurvey(data) }
-}*/
-
 
 var OpenEnded = {
     type: 'survey-text',
@@ -102,7 +88,7 @@ var OpenEnded = {
         required: false
     }],
     button_label: '完成',
-    on_finish: function(data) { data.response = data.response.Q0;data.value = new Date().toLocaleTimeString() }
+    on_finish: function(data) { data.response = data.response.Q0;}
 }
 
 var test_st = [
@@ -133,10 +119,6 @@ var coinlist = [
     { data: { varname: "s",face: 0 }, s0:1, s1:1, r0:0, r1:1,face: 0 },
     { data: { varname: "sp",face: 1 }, s0:1, s1:1, r0:0, r1:1,face: 1 },
     { data: { varname: "sp",face: 0 }, s0:0.5, s1:0.5, r0:2, r1:1,face: 0 },
-    { data: { varname: "sp",face: 1 }, s0:0.5, s1:0.5, r0:0, r1:-1,face: 0 },
-    { data: { varname: "sp",face: 0 }, s0:-1, s1:0.5, r0:-1, r1:1,face: 1 },
-    { data: { varname: "sp",face: 1 }, s0:2, s1:3, r0:-1, r1:2,face: 1 },
-
 ]
 //硬币
 var cointrust = {
@@ -178,7 +160,7 @@ var shame_test = {
 var main_timeline = [
     set_html_style,
     open_fullscreen,
-    instr_coin,
+    instr_coin,instr_exp,
     cointrust,
     OpenEnded,
     close_fullscreen,
@@ -192,9 +174,6 @@ var main_timeline = [
 //     on_finish: function() {
 //         var resultJson = jsPsych.data.get().json();
 //         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
-//         if(condition==0){
-//             document.getElementById('jspsych-content').innerHTML += '实验过程中图形推理的排名是我们杜撰，并非您的真实能力反应，请勿有任何消极情绪'
-//         }
 //         // jatos.submitResultData(resultJson, jatos.startNextComponent);
 //     }
 // });
@@ -206,9 +185,6 @@ jsPsych.init({
     on_finish: function() {
         var resultJson = jsPsych.data.get().json();
         document.getElementById('jspsych-content').innerHTML += '实验结束，感谢您的参与！'
-        if(condition==0){
-            document.getElementById('jspsych-content').innerHTML += '实验过程中图形推理的排名是我们杜撰，并非您的真实能力反应，请勿有任何消极情绪'
-        }
         // jatos.submitResultData(resultJson, jatos.startNextComponent);
     }
 });
