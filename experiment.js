@@ -78,6 +78,13 @@ var instr_exp = {
 
 /* Blocks: Surveys */
 
+var rep_coin = {
+    type: 'html-button-response',
+    choices:['国徽面','数字面'],
+    prompt: '请选择你掷出的硬币面向',
+
+    }
+
 var OpenEnded = {
     type: 'survey-text',
     data: { varname: 'OpenEnded' },
@@ -91,19 +98,19 @@ var OpenEnded = {
     on_finish: function(data) { data.response = data.response.Q0;}
 }
 
-var test_st = [
-    {img:"images/d11.png" },
-    {img:"images/d12.png" },
-    {img:"images/e10.png" },
-    {img:"images/e12.png" },
-    {img:"images/g15.png" },
-    {img:"images/m12.jpg" },
-    {img:"images/m16.jpg" },
-    {img:"images/m18.jpg" },
-    {img:"images/m23.jpg" },
-    {img:"images/m35.jpg" },
-    {img:"images/m36.jpg" },
-]
+// var test_st = [
+//     {img:"images/d11.png" },
+//     {img:"images/d12.png" },
+//     {img:"images/e10.png" },
+//     {img:"images/e12.png" },
+//     {img:"images/g15.png" },
+//     {img:"images/m12.jpg" },
+//     {img:"images/m16.jpg" },
+//     {img:"images/m18.jpg" },
+//     {img:"images/m23.jpg" },
+//     {img:"images/m35.jpg" },
+//     {img:"images/m36.jpg" },
+// ]
 
 var coinlist = [
     { data: { varname: "z",face: 1 }, s0:0.5, s1:0, r0:1, r1:1, face: 1 },
@@ -127,10 +134,17 @@ var cointrust = {
             type: 'html-button-response',
             data: jsPsych.timelineVariable('data'),
             stimulus: function() {
-                var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>搭档</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>你</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><div id="euro" class="trans'+jsPsych.timelineVariable('face')+'"><article class="back"></article><article class="middle" style="transform: translateZ(1px)"></article><article class="middle" style="transform: translateZ(2px)"></article><article class="middle" style="transform: translateZ(3px)"></article><article class="middle" style="transform: translateZ(4px)"></article><article class="middle" style="transform: translateZ(5px)"></article><article class="middle" style="transform: translateZ(6px)"></article><article class="middle" style="transform: translateZ(7px)"></article><article class="middle" style="transform: translateZ(8px)"></article><article class="middle" style="transform: translateZ(9px)"></article><article class="front"></article></div>';
+                var rp = jsPsych.data.get().last(1).values()[0].response;
+                var fc = "国徽面"
+                if (rp==0) {fc = "数字面"}
+                if (rp==jsPsych.timelineVariable('face')) {
+                    var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>搭档</td><td>'+jsPsych.timelineVariable("s0")+'</td><td>'+jsPsych.timelineVariable("s1")+'</td></tr><tr><td>你</td><td>'+jsPsych.timelineVariable("r0")+'</td><td>'+jsPsych.timelineVariable("r1")+'</td></tr></tbody></table><p>你掷出了'+fc+'</p>';
+                }else{
+                    var html = '<table border="1" style="min-width: -webkit-fill-available;"><tbody><tr><th>收益表</th><th>国徽面</th><th>数字面</th></tr><tr><td>搭档</td><td>'+jsPsych.timelineVariable("s1")+'</td><td>'+jsPsych.timelineVariable("s0")+'</td></tr><tr><td>你</td><td>'+jsPsych.timelineVariable("r1")+'</td><td>'+jsPsych.timelineVariable("r0")+'</td></tr></tbody></table><p>你掷出了'+fc+'</p>';
+                }
                 return html;
             },
-            prompt: '实际掷出情况如上图，你认为你的搭档将会报告哪一面',
+            prompt: '你认为你的搭档将会报告哪一面',
             choices:['国徽面', '数字面'],
             post_trial_gap: 400,
         },
@@ -139,19 +153,19 @@ var cointrust = {
     randomize_order: true,
 }
 
-var shame_test = {
-    timeline_variables: test_st,
-    timeline:[{
-        type: 'html-button-response',
-        stimulus:function(){
-            var html = '<div id="timelimit" style="text-align:center;font-size:15px;margin-bottom:30px;"></div><img src="'+jsPsych.timelineVariable("img")+'"></img>';
-            return html;
-        },
-        choices:['1','2','3','4','5','6','7','8'],
-        prompt: '请选择最合适的图片',
-    }],
-    trial_duration:30000,
-    }
+// var shame_test = {
+//     timeline_variables: test_st,
+//     timeline:[{
+//         type: 'html-button-response',
+//         stimulus:function(){
+//             var html = '<div id="timelimit" style="text-align:center;font-size:15px;margin-bottom:30px;"></div><img src="'+jsPsych.timelineVariable("img")+'"></img>';
+//             return html;
+//         },
+//         choices:['1','2','3','4','5','6','7','8'],
+//         prompt: '请选择最合适的图片',
+//     }],
+//     trial_duration:30000,
+//     }
 
 /* Combine Timelines */
 
