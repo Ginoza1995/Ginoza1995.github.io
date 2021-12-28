@@ -56,7 +56,7 @@ var close_fullscreen = {
 var instr_coin = {
     type: 'instructions',
     pages: [
-        `<p>接下来，你将与搭档来进行猜硬币的游戏。<b style="color:#a70b0b">由你来掷硬币，并如实输入系统。</b>之后将出现收益表，<b style="color:#a70b0b">你的搭档也会看到</b>。你与搭档的收益将由你的搭档最后向系统报告的所决定。`,
+        `<p>接下来，你将与搭档来进行猜硬币的游戏。<b style="color:#a70b0b">由你来掷硬币，并如实输入系统。</b>之后将出现收益表，<b style="color:#a70b0b">你的搭档也会看到</b>。你与搭档的收益将由你的搭档最后向系统报告的所决定。</p>`,
     ],
     show_clickable_nav: true,
     allow_backward: false,
@@ -67,12 +67,12 @@ var instr_coin = {
 var wait = {
     type: 'instructions',
     pages: [
-        `<p>接下来，你将与搭档来进行猜硬币的游戏。<b style="color:#a70b0b">由你来掷硬币，并如实输入系统。</b>之后将出现收益表，<b style="color:#a70b0b">你的搭档也会看到</b>。你与搭档的收益将由你的搭档最后向系统报告的所决定。`,
+        `<p>等待你的搭档做出选择ing……</p>`,
     ],
     show_clickable_nav: false,
     allow_backward: false,
     trial_duration:function () {
-        return jsPsych.randomization.sampleWithoutReplacement([800, 900, 1000, 1100], 1)[0];
+        return jsPsych.randomization.sampleWithoutReplacement([8000, 5000, 10000, 2000，0], 1)[0];
       },
 }
 
@@ -160,7 +160,7 @@ var cointrust = {
             prompt: '你认为你的搭档将会报告哪一面',
             choices:['国徽面', '数字面'],
             post_trial_gap: 400,
-        },
+        },wait,
         ],
     // trial presentation
     randomize_order: true,
