@@ -65,14 +65,11 @@ var instr_coin = {
 }
 
 var wait = {
-    type: 'instructions',
-    pages: [
-        `<p>等待你的搭档做出选择ing……</p>`,
-    ],
-    show_clickable_nav: false,
-    allow_backward: false,
+    type: 'html-button-response',
+    stimulus: `<p>等待你的搭档做出选择ing……</p>`,
+    choices:'',
     trial_duration:function () {
-        return jsPsych.randomization.sampleWithoutReplacement([8000, 5000, 10000, 2000，0], 1)[0];
+        return (5000+Math.floor(Math.random()*10000));
       },
 }
 
